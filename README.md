@@ -1,10 +1,10 @@
-# Chronos App
+# Helios Chronos App
 
 Automated Task Scheduler for Helios Blockchain
 
 ## Overview
 
-Chronos App is a proof-of-concept application that allows users to manage and monitor their automated tasks (crons) on the Helios blockchain. Users can connect their wallet and view detailed information about their scheduled smart contract executions.
+Helios Chronos App is a proof-of-concept application that allows users to manage and monitor their automated tasks (crons) on the Helios blockchain. Users can connect their wallet and view detailed information about their scheduled smart contract executions.
 
 ## Features
 
@@ -28,7 +28,7 @@ Chronos App is a proof-of-concept application that allows users to manage and mo
 
 ```bash
 git clone <repository-url>
-cd chronos-app
+cd helios-chronos-app
 ```
 
 2. Install dependencies:
@@ -47,7 +47,7 @@ Edit `.env.local` and add your configuration:
 
 ```
 NEXT_PUBLIC_NODE_ENV=development
-NEXT_PUBLIC_BASE_URL=http://localhost:3001
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 NEXT_PUBLIC_INFURA_KEY=your_infura_key_here
 NEXT_PUBLIC_PROJECT_ID=your_reown_project_id_here
 ```
