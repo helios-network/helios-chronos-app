@@ -1,0 +1,32 @@
+.card {
+  background: var(--background-primary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+
+  &.hover {
+    &:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+      border-color: var(--border-medium);
+    }
+  }
+}
+
+// Padding variants
+.none {
+  padding: 0;
+}
+
+.small {
+  padding: var(--spacing-m);
+}
+
+.medium {
+  padding: var(--spacing-l);
+}
+
+.large {
+  padding: var(--spacing-2xl);
+}

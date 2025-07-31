@@ -1,0 +1,214 @@
+.container {
+  min-height: calc(100vh - 60px);
+  background: var(--background-secondary);
+}
+
+.pageHeader {
+  padding: var(--spacing-2xl) var(--spacing-l);
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    var(--primary-medium) 0%,
+    var(--primary-dark) 100%
+  );
+  color: white;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+      repeat;
+    opacity: 0.3;
+  }
+}
+
+.headerContent {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-m);
+  margin-bottom: var(--spacing-m);
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #ffffff, #e0e7ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+}
+
+.heliosBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: var(--spacing-s) var(--spacing-m);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.heliosIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgba(37, 99, 235, 0.3));
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  opacity: 0.9;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.content {
+  padding: var(--spacing-2xl) 0;
+}
+
+.statsContainer {
+  max-width: 1200px;
+  margin: 0 auto var(--spacing-2xl);
+  padding: 0 var(--spacing-l);
+}
+
+.statsHeading {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+  color: var(--text-primary);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-l);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.statsCard {
+  text-align: center;
+  padding: var(--spacing-xl);
+  background: linear-gradient(
+    135deg,
+    var(--primary-medium) 0%,
+    var(--primary-light) 100%
+  );
+  color: white;
+  border: none;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  &:hover::before {
+    transform: translateX(100%);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+}
+
+.statsValue {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-s);
+  position: relative;
+  z-index: 1;
+}
+
+.statsTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  position: relative;
+  z-index: 1;
+}
+
+.statsDescription {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .pageHeader {
+    padding: var(--spacing-xl) var(--spacing-m);
+  }
+
+  .content {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-m);
+  }
+
+  .statsCard {
+    padding: var(--spacing-l);
+  }
+
+  .statsValue {
+    font-size: 2rem;
+  }
+
+  .heliosBadge {
+    font-size: 0.75rem;
+    padding: var(--spacing-xs) var(--spacing-s);
+  }
+
+  .heliosIcon {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -1,0 +1,108 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-s);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-family: var(--font-main);
+  box-shadow: var(--shadow-sm);
+
+  &:focus {
+    outline: 2px solid var(--primary-medium);
+    outline-offset: 2px;
+  }
+
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+}
+
+// Variants
+.primary {
+  background-color: var(--primary-medium);
+  color: white;
+
+  &:hover:not(.disabled) {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active:not(.disabled) {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.secondary {
+  background-color: var(--background-medium);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+
+  &:hover:not(.disabled) {
+    background-color: var(--border-light);
+    border-color: var(--border-medium);
+  }
+
+  &:active:not(.disabled) {
+    background-color: var(--border-medium);
+  }
+}
+
+.outline {
+  background-color: transparent;
+  color: var(--primary-medium);
+  border: 1px solid var(--primary-medium);
+  box-shadow: none;
+
+  &:hover:not(.disabled) {
+    background-color: rgba(99, 102, 241, 0.05);
+    border-color: var(--primary-dark);
+    color: var(--primary-dark);
+  }
+
+  &:active:not(.disabled) {
+    background-color: rgba(99, 102, 241, 0.1);
+  }
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--text-secondary);
+  box-shadow: none;
+
+  &:hover:not(.disabled) {
+    background-color: var(--background-medium);
+    color: var(--text-primary);
+  }
+
+  &:active:not(.disabled) {
+    background-color: var(--border-light);
+  }
+}
+
+// Sizes
+.small {
+  padding: 8px 12px;
+  font-size: 14px;
+  min-height: 32px;
+}
+
+.medium {
+  padding: 12px 16px;
+  font-size: 16px;
+  min-height: 40px;
+}
+
+.large {
+  padding: 16px 24px;
+  font-size: 18px;
+  min-height: 48px;
+}

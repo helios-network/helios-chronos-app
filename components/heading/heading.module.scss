@@ -1,0 +1,28 @@
+.heading {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+  font-family: var(--font-main);
+}
+
+.small {
+  font-size: 1.125rem; // 18px
+  font-weight: 500;
+}
+
+.medium {
+  font-size: 1.5rem; // 24px
+  font-weight: 600;
+}
+
+.large {
+  font-size: 2rem; // 32px
+  font-weight: 700;
+}
+
+.xlarge {
+  font-size: 3rem; // 48px
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
