@@ -20,11 +20,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Chronos Team" }],
   viewport: "width=device-width, initial-scale=1",
   themeColor: APP_THEME_COLOR,
-  // icons: {
-  //   icon: "/img/logo2.png",
-  //   shortcut: "/img/logo2.png",
-  //   apple: "/img/logo2.png",
-  // },
 };
 
 export default async function RootLayout({
