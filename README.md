@@ -14,16 +14,6 @@ Chronos App is a proof-of-concept application that allows users to manage and mo
 - **Responsive Design**: Works on desktop and mobile devices
 - **Helios Integration**: Direct integration with Helios blockchain RPC
 
-## Tech Stack
-
-- **Framework**: Next.js 15.2.1 with React 19
-- **Styling**: SCSS Modules
-- **Wallet Integration**: Reown AppKit with Wagmi
-- **State Management**: Zustand
-- **Data Fetching**: TanStack Query
-- **Blockchain**: Helios Network
-- **TypeScript**: Full type safety
-
 ## Getting Started
 
 ### Prerequisites
@@ -90,31 +80,6 @@ Each cron contains the following information:
 - **Gas Configuration**: Gas limit and max gas price
 - **Statistics**: Total executions, fees paid
 - **Status**: Current execution stage (Pending, Executing, Completed, Failed, Expired)
-
-## Project Structure
-
-```
-chronos-app/
-├── app/                    # Next.js app directory
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page
-├── components/            # Reusable UI components
-│   ├── button/           # Button component
-│   ├── card/             # Card component
-│   ├── cron-list/        # Main cron listing component
-│   └── heading/          # Heading component
-├── config/               # Configuration files
-│   ├── app.ts           # App constants
-│   ├── rpc.ts           # RPC configuration
-│   └── wagmi.ts         # Wallet configuration
-├── context/             # React context providers
-├── hooks/               # Custom React hooks
-│   └── useCrons.ts      # Cron data fetching
-├── stores/              # Zustand stores
-├── styles/              # Global styles
-├── types/               # TypeScript type definitions
-└── utils/               # Utility functions
-```
 
 ## Development
 
