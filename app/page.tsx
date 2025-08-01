@@ -7,7 +7,7 @@ import { useCronStatistics } from "@/hooks/useCrons";
 import s from "./page.module.scss";
 
 const HeliosIcon = () => (
-  <img src="/img/logo.png" alt="Helios" className={s.heliosIcon} />
+  <img src="/favicon.png" alt="Helios" className={s.heliosIcon} />
 );
 
 const StatsCard = ({
@@ -82,6 +82,8 @@ export default function HomePage() {
             Automated Task Scheduler for Helios Blockchain. Schedule smart
             contract executions with precision and reliability.
           </p>
+          <div className={s.decorativeIcon}></div>
+          <div className={s.decorativeIconLeft}></div>
         </div>
       </header>
 
