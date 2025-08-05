@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 import { useWeb3Provider } from "./useWeb3Provider";
+import { toast } from "sonner";
 
 // Chronos precompile contract address
 const CHRONOS_CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000830";
@@ -297,9 +298,8 @@ export const useCreateCron = () => {
 
       try {
         console.log("Cron creation in progress...");
-        setFeedback({
-          status: "primary",
-          message: "Creating cron transaction...",
+        toast.loading("Preparing cron transaction...", {
+          id: "cron-creation",
         });
 
         // Create web3 contract instance
@@ -369,6 +369,10 @@ export const useCreateCron = () => {
           amountToDeposit: amountToDepositWei,
         });
 
+        toast.loading("Sending transaction to blockchain...", {
+          id: "cron-creation",
+        });
+
         // Send the transaction
         const tx = await contract.methods
           .createCron(
@@ -391,9 +395,9 @@ export const useCreateCron = () => {
 
         console.log("Transaction sent, hash:", tx.transactionHash);
 
-        setFeedback({
-          status: "primary",
-          message: `Transaction sent, waiting for confirmation...`,
+        toast.loading(`Transaction sent! Waiting for confirmation...`, {
+          id: "cron-creation",
+          description: `Hash: ${tx.transactionHash.slice(0, 10)}...`,
         });
 
         // Wait for transaction receipt
@@ -419,18 +423,18 @@ export const useCreateCron = () => {
         console.error("Error during cron creation:", error);
         const errorMessage =
           getErrorMessage(error) || "Error during cron creation";
-        setFeedback({
-          status: "danger",
-          message: errorMessage,
+        toast.error("Failed to create cron", {
+          id: "cron-creation",
+          description: errorMessage,
         });
         throw error;
       }
     },
     onError: (error: any) => {
       console.error("Mutation error:", error);
-      setFeedback({
-        status: "danger",
-        message: getErrorMessage(error) || "Error during cron creation",
+      toast.error("Failed to create cron", {
+        id: "cron-creation",
+        description: getErrorMessage(error) || "Error during cron creation",
       });
     },
   });
@@ -439,15 +443,24 @@ export const useCreateCron = () => {
     try {
       const result = await createCronMutation.mutateAsync(cronParams);
 
-      setFeedback({
-        status: "success",
-        message: `Cron scheduled successfully! Refreshing data...`,
+      toast.success("Cron scheduled successfully!", {
+        id: "cron-creation",
+        description: "Your automated task has been created and is now active",
       });
       console.log("Cron successfully created!");
+
+      // Show loading toast for data refresh
+      toast.loading("Refreshing cron data...", {
+        id: "cron-refresh",
+      });
 
       // Refetch relevant queries
       await queryClient.refetchQueries({ queryKey: ["crons", address] });
       await queryClient.refetchQueries({ queryKey: ["cronStatistics"] });
+
+      toast.success("Data refreshed!", {
+        id: "cron-refresh",
+      });
 
       return result;
     } catch (error) {

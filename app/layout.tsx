@@ -4,6 +4,7 @@ import ContextProvider from "@/context";
 import { headers } from "next/headers";
 import { Metadata } from "next";
 import { Header } from "./(components)/header";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Chronos - Automated Task Scheduler | Helios",
@@ -35,6 +36,12 @@ export default async function RootLayout({
         <ContextProvider cookies={cookies}>
           <Header />
           <main style={{ padding: "24px" }}>{children}</main>
+          <Toaster
+            position="bottom-right"
+            richColors
+            closeButton
+            theme="dark"
+          />
         </ContextProvider>
       </body>
     </html>
