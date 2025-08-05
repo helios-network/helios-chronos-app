@@ -8,8 +8,95 @@ import { useWeb3Provider } from "./useWeb3Provider";
 // Chronos precompile contract address
 const CHRONOS_CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000830";
 
-// ABI for the Chronos contract's createCron function
+// Complete ABI for the Chronos contract
 const chronosAbi = [
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "fromAddress",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "toAddress",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "cronId",
+        type: "uint64",
+      },
+    ],
+    name: "CronCreated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "fromAddress",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "toAddress",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "cronId",
+        type: "uint64",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "success",
+        type: "bool",
+      },
+    ],
+    name: "CronModified",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "fromAddress",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "toAddress",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "cronId",
+        type: "uint64",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "success",
+        type: "bool",
+      },
+    ],
+    name: "CronCancelled",
+    type: "event",
+  },
   {
     inputs: [
       {
@@ -33,19 +120,19 @@ const chronosAbi = [
         type: "string[]",
       },
       {
-        internalType: "uint256",
+        internalType: "uint64",
         name: "frequency",
-        type: "uint256",
+        type: "uint64",
       },
       {
-        internalType: "uint256",
+        internalType: "uint64",
         name: "expirationBlock",
-        type: "uint256",
+        type: "uint64",
       },
       {
-        internalType: "uint256",
+        internalType: "uint64",
         name: "gasLimit",
-        type: "uint256",
+        type: "uint64",
       },
       {
         internalType: "uint256",
@@ -61,12 +148,119 @@ const chronosAbi = [
     name: "createCron",
     outputs: [
       {
+        internalType: "bool",
+        name: "success",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "contractAddress",
+        type: "address",
+      },
+      {
+        internalType: "string",
+        name: "methodName",
+        type: "string",
+      },
+      {
+        internalType: "uint64",
+        name: "expirationBlock",
+        type: "uint64",
+      },
+      {
+        internalType: "uint64",
+        name: "gasLimit",
+        type: "uint64",
+      },
+      {
+        internalType: "uint256",
+        name: "maxGasPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountToDeposit",
+        type: "uint256",
+      },
+    ],
+    name: "createCallbackConditionedCron",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "success",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
         name: "cronId",
         type: "uint256",
       },
+      {
+        internalType: "uint256",
+        name: "newFrequency",
+        type: "uint256",
+      },
+      {
+        internalType: "string[]",
+        name: "newParams",
+        type: "string[]",
+      },
+      {
+        internalType: "uint256",
+        name: "newExpirationBlock",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "newGasLimit",
+        type: "uint256",
+      },
+      {
+        internalType: "uint64",
+        name: "newMaxGasPrice",
+        type: "uint64",
+      },
     ],
-    stateMutability: "payable",
+    name: "updateCron",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "success",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint64",
+        name: "cronId",
+        type: "uint64",
+      },
+    ],
+    name: "cancelCron",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "success",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
     type: "function",
   },
 ];
@@ -114,9 +308,28 @@ export const useCreateCron = () => {
           CHRONOS_CONTRACT_ADDRESS
         );
 
-        // Get current block number to calculate expiration
-        const currentBlock = await web3Provider.eth.getBlockNumber();
-        console.log("Current block:", currentBlock);
+        // Get current block number with retry logic
+        let currentBlock;
+        let retries = 3;
+        while (retries > 0) {
+          try {
+            currentBlock = await web3Provider.eth.getBlockNumber();
+            console.log("Current block:", currentBlock);
+            break;
+          } catch (blockError) {
+            console.warn(
+              `Failed to get block number, retries left: ${retries - 1}`
+            );
+            retries--;
+            if (retries === 0) {
+              throw new Error(
+                "Failed to get current block number after retries"
+              );
+            }
+            // Wait 1 second before retry
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+          }
+        }
 
         // Convert parameters to the right format
         const maxGasPriceWei = web3Provider.utils.toWei(
@@ -131,8 +344,9 @@ export const useCreateCron = () => {
         // Ensure all numeric values are properly converted to avoid BigInt mixing issues
         const frequency = BigInt(cronParams.frequency);
         const gasLimit = BigInt(cronParams.gasLimit);
+        // Add a small buffer to avoid edge cases with block synchronization
         const expirationBlock =
-          currentBlock + BigInt(cronParams.expirationBlocks);
+          currentBlock + BigInt(cronParams.expirationBlocks) + BigInt(10);
 
         // Verify contract exists
         const targetContractCode = await web3Provider.eth.getCode(
@@ -145,33 +359,15 @@ export const useCreateCron = () => {
         }
 
         console.log("Target contract exists, proceeding with createCron...");
-
-        // Call first to check if transaction will succeed
-        try {
-          await contract.methods
-            .createCron(
-              cronParams.contractAddress,
-              cronParams.abi,
-              cronParams.methodName,
-              cronParams.params,
-              frequency,
-              expirationBlock,
-              gasLimit,
-              maxGasPriceWei,
-              amountToDepositWei
-            )
-            .call({
-              from: address,
-              value: amountToDepositWei,
-            });
-        } catch (callError) {
-          console.error("Call error:", callError);
-          throw new Error(
-            `Transaction would fail: ${
-              getErrorMessage(callError) || "Unknown error"
-            }`
-          );
-        }
+        console.log("Parameters:", {
+          contractAddress: cronParams.contractAddress,
+          methodName: cronParams.methodName,
+          frequency: frequency.toString(),
+          expirationBlock: expirationBlock.toString(),
+          gasLimit: gasLimit.toString(),
+          maxGasPrice: maxGasPriceWei,
+          amountToDeposit: amountToDepositWei,
+        });
 
         // Send the transaction
         const tx = await contract.methods
