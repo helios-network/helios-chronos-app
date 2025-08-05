@@ -5,9 +5,11 @@ import { useAppKit } from "@reown/appkit/react";
 import { useAccount, useDisconnect } from "wagmi";
 import { useEffect, useState } from "react";
 import s from "./header.module.scss";
+import Image from "next/image";
+import Link from "next/link";
 
 const HeliosLogo = () => (
-  <img src="/img/logo1.png" alt="Helios" className={s.logo} />
+  <Image src="/img/logo1.png" alt="Helios" className={s.logo} />
 );
 
 const ChronosIcon = () => (
@@ -178,14 +180,14 @@ export const Header = () => {
             <HeliosLogo />
           </a>
           <div className={s.divider}></div>
-          <a href="/" className={s.chronosSection}>
+          <Link href="/" className={s.chronosSection}>
             <ChronosIcon />
             <span className={s.chronosText}>Chronos</span>
-          </a>
+          </Link>
         </div>
         <div className={s.right}>
           <div className={s.navLinks}>
-            <a href="/" className={s.navLink}>
+            <Link href="/" className={s.navLink}>
               <svg
                 className={s.navIcon}
                 viewBox="0 0 24 24"
@@ -198,8 +200,8 @@ export const Header = () => {
                 />
               </svg>
               Home
-            </a>
-            <a href="/schedule" className={s.navLink}>
+            </Link>
+            <Link href="/schedule" className={s.navLink}>
               <svg
                 className={s.navIcon}
                 viewBox="0 0 24 24"
@@ -212,7 +214,7 @@ export const Header = () => {
                 />
               </svg>
               Schedule
-            </a>
+            </Link>
             <div className={`${s.navLink} ${s.navLinkDisabled}`}>
               <svg
                 className={s.navIcon}

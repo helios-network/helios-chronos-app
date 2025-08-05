@@ -5,9 +5,10 @@ import { Card } from "@/components/card";
 import { Heading } from "@/components/heading";
 import { useCronStatistics } from "@/hooks/useCrons";
 import s from "./page.module.scss";
+import Image from "next/image";
 
 const HeliosIcon = () => (
-  <img src="/favicon.png" alt="Helios" className={s.heliosIcon} />
+  <Image src="/favicon.png" alt="Helios" className={s.heliosIcon} />
 );
 
 const StatsCard = ({

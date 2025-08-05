@@ -128,7 +128,8 @@ export const useCreateCron = () => {
           cronParams.amountToDeposit,
           "ether"
         );
-        const expirationBlock = currentBlock + cronParams.expirationBlocks;
+        const expirationBlock =
+          currentBlock + BigInt(cronParams.expirationBlocks);
 
         // Verify contract exists
         const targetContractCode = await web3Provider.eth.getCode(
@@ -186,7 +187,7 @@ export const useCreateCron = () => {
             from: address,
             value: amountToDepositWei,
             gasPrice: web3Provider.utils.toWei("20", "gwei"),
-            gas: 2000000,
+            gas: "2000000",
           });
 
         console.log("Transaction sent, hash:", tx.transactionHash);

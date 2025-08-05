@@ -1,50 +1,50 @@
-"use client"
+"use client";
 
-import { useCrons } from "@/hooks/useCrons"
-import { Card } from "@/components/card"
-import { Heading } from "@/components/heading"
-import { Button } from "@/components/button"
-import { useAccount } from "wagmi"
-import { Cron, ExecutionStage } from "@/types/cron"
-import { formatDistanceToNow } from "date-fns"
-import s from "./cron-list.module.scss"
+import { useCrons } from "@/hooks/useCrons";
+import { Card } from "@/components/card";
+import { Heading } from "@/components/heading";
+import { Button } from "@/components/button";
+import { useAccount } from "wagmi";
+import { Cron, ExecutionStage } from "@/types/cron";
+import { formatDistanceToNow } from "date-fns";
+import s from "./cron-list.module.scss";
 
 const getExecutionStageLabel = (stage: ExecutionStage): string => {
   switch (stage) {
     case ExecutionStage.PENDING:
-      return "Pending"
+      return "Pending";
     case ExecutionStage.EXECUTING:
-      return "Executing"
+      return "Executing";
     case ExecutionStage.COMPLETED:
-      return "Completed"
+      return "Completed";
     case ExecutionStage.FAILED:
-      return "Failed"
+      return "Failed";
     case ExecutionStage.EXPIRED:
-      return "Expired"
+      return "Expired";
     default:
-      return "Unknown"
+      return "Unknown";
   }
-}
+};
 
 const getExecutionStageColor = (stage: ExecutionStage): string => {
   switch (stage) {
     case ExecutionStage.PENDING:
-      return "#f59e0b"
+      return "#f59e0b";
     case ExecutionStage.EXECUTING:
-      return "#3b82f6"
+      return "#3b82f6";
     case ExecutionStage.COMPLETED:
-      return "#10b981"
+      return "#10b981";
     case ExecutionStage.FAILED:
-      return "#ef4444"
+      return "#ef4444";
     case ExecutionStage.EXPIRED:
-      return "#6b7280"
+      return "#6b7280";
     default:
-      return "#6b7280"
+      return "#6b7280";
   }
-}
+};
 
 const CronCard = ({ cron }: { cron: Cron }) => {
-  const queueDate = new Date(cron.queueTimestamp * 1000)
+  const queueDate = new Date(cron.queueTimestamp * 1000);
 
   return (
     <Card className={s.cronCard} hover>
@@ -56,7 +56,7 @@ const CronCard = ({ cron }: { cron: Cron }) => {
         <div
           className={s.status}
           style={{
-            backgroundColor: getExecutionStageColor(cron.executionStage)
+            backgroundColor: getExecutionStageColor(cron.executionStage),
           }}
         >
           {getExecutionStageLabel(cron.executionStage)}
@@ -128,12 +128,12 @@ const CronCard = ({ cron }: { cron: Cron }) => {
         {cron.archived && <div className={s.archivedBadge}>Archived</div>}
       </div>
     </Card>
-  )
-}
+  );
+};
 
 export const CronList = () => {
-  const { address, isConnected } = useAccount()
-  const { data, isLoading, error, refetch, isFetching } = useCrons()
+  const { address, isConnected } = useAccount();
+  const { data, isLoading, error, refetch, isFetching } = useCrons();
 
   if (!isConnected) {
     return (
@@ -148,7 +148,7 @@ export const CronList = () => {
           </p>
         </Card>
       </div>
-    )
+    );
   }
 
   if (isLoading) {
@@ -164,7 +164,7 @@ export const CronList = () => {
           <p>Loading your crons...</p>
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -199,10 +199,10 @@ export const CronList = () => {
           <Button onClick={() => refetch()}>Try Again</Button>
         </Card>
       </div>
-    )
+    );
   }
 
-  const crons = data?.crons || []
+  const crons = data?.crons || [];
 
   return (
     <div className={s.container}>
@@ -237,8 +237,8 @@ export const CronList = () => {
             No Automated Tasks Found
           </Heading>
           <p>
-            You don't have any automated tasks (crons) set up yet. Create your
-            first cron to start automating blockchain interactions.
+            You don&apos;t have any automated tasks (crons) set up yet. Create
+            your first cron to start automating blockchain interactions.
           </p>
         </Card>
       ) : (
@@ -249,5 +249,5 @@ export const CronList = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
