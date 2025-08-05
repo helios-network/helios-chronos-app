@@ -7,6 +7,8 @@ import { useCronStatistics } from "@/hooks/useCrons";
 import s from "./page.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const HeliosIcon = () => (
   <Image
@@ -35,12 +37,75 @@ const StatsCard = ({
 );
 
 const CronStatistics = () => {
-  const { data: stats, isLoading, error } = useCronStatistics();
+  const { data: stats, isLoading, error, isFetching } = useCronStatistics();
 
-  if (isLoading || error || !stats) {
-    return null;
+  // Show loading state only on initial load, not during refetch
+  if (isLoading && !stats) {
+    return (
+      <div className={s.statsContainer}>
+        <Heading level={2} size="medium" className={s.statsHeading}>
+          Network Statistics
+        </Heading>
+        <div className={s.statsGrid}>
+          <StatsCard
+            title="Total Crons"
+            value="Loading..."
+            description="Active automated tasks"
+          />
+          <StatsCard
+            title="Queue Count"
+            value="Loading..."
+            description="Tasks waiting execution"
+          />
+          <StatsCard
+            title="Archived"
+            value="Loading..."
+            description="Completed tasks"
+          />
+          <StatsCard
+            title="Last Block Executions"
+            value="Loading..."
+            description="Tasks executed recently"
+          />
+        </div>
+      </div>
+    );
   }
 
+  // Show error state
+  if (error && !stats) {
+    return (
+      <div className={s.statsContainer}>
+        <Heading level={2} size="medium" className={s.statsHeading}>
+          Network Statistics
+        </Heading>
+        <div className={s.statsGrid}>
+          <StatsCard
+            title="Total Crons"
+            value="Error"
+            description="Failed to load data"
+          />
+          <StatsCard
+            title="Queue Count"
+            value="Error"
+            description="Failed to load data"
+          />
+          <StatsCard
+            title="Archived"
+            value="Error"
+            description="Failed to load data"
+          />
+          <StatsCard
+            title="Last Block Executions"
+            value="Error"
+            description="Failed to load data"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Show data (or fallback to 0 if no data)
   return (
     <div className={s.statsContainer}>
       <Heading level={2} size="medium" className={s.statsHeading}>
@@ -49,22 +114,22 @@ const CronStatistics = () => {
       <div className={s.statsGrid}>
         <StatsCard
           title="Total Crons"
-          value={stats.cronCount?.toLocaleString() || "0"}
+          value={stats?.cronCount?.toLocaleString() || "0"}
           description="Active automated tasks"
         />
         <StatsCard
           title="Queue Count"
-          value={stats.queueCount?.toLocaleString() || "0"}
+          value={stats?.queueCount?.toLocaleString() || "0"}
           description="Tasks waiting execution"
         />
         <StatsCard
           title="Archived"
-          value={stats.archivedCrons?.toLocaleString() || "0"}
+          value={stats?.archivedCrons?.toLocaleString() || "0"}
           description="Completed tasks"
         />
         <StatsCard
           title="Last Block Executions"
-          value={stats.executedLastBlockCount?.toLocaleString() || "0"}
+          value={stats?.executedLastBlockCount?.toLocaleString() || "0"}
           description="Tasks executed recently"
         />
       </div>
@@ -73,6 +138,18 @@ const CronStatistics = () => {
 };
 
 export default function HomePage() {
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    // Invalidate and refetch cron statistics when the home page mounts
+    // This ensures fresh data is loaded when navigating back from other pages
+    console.log("HomePage mounted - invalidating cronStatistics query");
+    queryClient.invalidateQueries({ queryKey: ["cronStatistics"] });
+
+    // Also refetch to ensure immediate update
+    queryClient.refetchQueries({ queryKey: ["cronStatistics"] });
+  }, [queryClient]);
+
   return (
     <div className={s.container}>
       <header className={s.pageHeader}>
