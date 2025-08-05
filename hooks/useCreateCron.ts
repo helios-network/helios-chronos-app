@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 import { useWeb3Provider } from "./useWeb3Provider";
-import { ethers } from "ethers";
 
 // Chronos precompile contract address
 const CHRONOS_CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000830";
@@ -128,6 +127,10 @@ export const useCreateCron = () => {
           cronParams.amountToDeposit,
           "ether"
         );
+
+        // Ensure all numeric values are properly converted to avoid BigInt mixing issues
+        const frequency = BigInt(cronParams.frequency);
+        const gasLimit = BigInt(cronParams.gasLimit);
         const expirationBlock =
           currentBlock + BigInt(cronParams.expirationBlocks);
 
@@ -151,9 +154,9 @@ export const useCreateCron = () => {
               cronParams.abi,
               cronParams.methodName,
               cronParams.params,
-              cronParams.frequency,
+              frequency,
               expirationBlock,
-              cronParams.gasLimit,
+              gasLimit,
               maxGasPriceWei,
               amountToDepositWei
             )
@@ -177,9 +180,9 @@ export const useCreateCron = () => {
             cronParams.abi,
             cronParams.methodName,
             cronParams.params,
-            cronParams.frequency,
+            frequency,
             expirationBlock,
-            cronParams.gasLimit,
+            gasLimit,
             maxGasPriceWei,
             amountToDepositWei
           )

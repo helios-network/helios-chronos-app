@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import s from "./header.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const HeliosLogo = () => (
   <Image
@@ -172,6 +173,8 @@ const Wallet = () => {
 };
 
 export const Header = () => {
+  const pathname = usePathname();
+
   return (
     <header className={s.header}>
       <div className={s.headerBackground}></div>
@@ -193,7 +196,12 @@ export const Header = () => {
         </div>
         <div className={s.right}>
           <div className={s.navLinks}>
-            <Link href="/" className={s.navLink}>
+            <Link
+              href="/"
+              className={`${s.navLink} ${
+                pathname === "/" ? s.navLinkActive : ""
+              }`}
+            >
               <svg
                 className={s.navIcon}
                 viewBox="0 0 24 24"
@@ -207,7 +215,12 @@ export const Header = () => {
               </svg>
               Home
             </Link>
-            <Link href="/schedule" className={s.navLink}>
+            <Link
+              href="/schedule"
+              className={`${s.navLink} ${
+                pathname === "/schedule" ? s.navLinkActive : ""
+              }`}
+            >
               <svg
                 className={s.navIcon}
                 viewBox="0 0 24 24"

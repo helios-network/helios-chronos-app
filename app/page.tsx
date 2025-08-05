@@ -6,6 +6,7 @@ import { Heading } from "@/components/heading";
 import { useCronStatistics } from "@/hooks/useCrons";
 import s from "./page.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeliosIcon = () => (
   <Image
@@ -90,7 +91,7 @@ export default function HomePage() {
             contract executions with precision and reliability.
           </p>
           <div className={s.actions}>
-            <a href="/schedule" className={s.scheduleButton}>
+            <Link href="/schedule" className={s.scheduleButton}>
               <svg
                 className={s.scheduleIcon}
                 viewBox="0 0 24 24"
@@ -103,7 +104,7 @@ export default function HomePage() {
                 />
               </svg>
               Schedule a Task
-            </a>
+            </Link>
           </div>
           <div className={s.decorativeIcon}></div>
           <div className={s.decorativeIconLeft}></div>

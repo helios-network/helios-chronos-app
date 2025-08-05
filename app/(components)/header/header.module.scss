@@ -286,6 +286,21 @@
   }
 }
 
+.navLinkActive {
+  color: #1e40af;
+  background: rgba(59, 130, 246, 0.08);
+  font-weight: 600;
+
+  &::after {
+    width: 80%;
+  }
+
+  .navIcon {
+    color: #1e40af;
+    transform: scale(1.1);
+  }
+}
+
 .navIcon {
   color: #3b82f6;
   transition: transform 0.3s ease;
