@@ -169,16 +169,23 @@ export const Header = () => {
       <div className={s.headerBackground}></div>
       <div className={s.headerContent}>
         <div className={s.logoSection}>
-          <HeliosLogo />
+          <a
+            href="https://helioschain.network"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={s.heliosLogoLink}
+          >
+            <HeliosLogo />
+          </a>
           <div className={s.divider}></div>
-          <div className={s.chronosSection}>
+          <a href="/" className={s.chronosSection}>
             <ChronosIcon />
             <span className={s.chronosText}>Chronos</span>
-          </div>
+          </a>
         </div>
         <div className={s.right}>
           <div className={s.navLinks}>
-            <div className={`${s.navLink} ${s.navLinkDisabled}`}>
+            <a href="/" className={s.navLink}>
               <svg
                 className={s.navIcon}
                 viewBox="0 0 24 24"
@@ -191,7 +198,21 @@ export const Header = () => {
                 />
               </svg>
               Home
-            </div>
+            </a>
+            <a href="/schedule" className={s.navLink}>
+              <svg
+                className={s.navIcon}
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+              >
+                <path
+                  d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"
+                  fill="currentColor"
+                />
+              </svg>
+              Schedule
+            </a>
             <div className={`${s.navLink} ${s.navLinkDisabled}`}>
               <svg
                 className={s.navIcon}
