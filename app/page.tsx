@@ -8,7 +8,13 @@ import s from "./page.module.scss";
 import Image from "next/image";
 
 const HeliosIcon = () => (
-  <Image src="/favicon.png" alt="Helios" className={s.heliosIcon} />
+  <Image
+    src="/favicon.png"
+    alt="Helios"
+    className={s.heliosIcon}
+    width={20}
+    height={20}
+  />
 );
 
 const StatsCard = ({

@@ -9,7 +9,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 const HeliosLogo = () => (
-  <Image src="/img/logo1.png" alt="Helios" className={s.logo} />
+  <Image
+    src="/img/logo1.png"
+    alt="Helios"
+    className={s.logo}
+    width={120}
+    height={40}
+  />
 );
 
 const ChronosIcon = () => (
