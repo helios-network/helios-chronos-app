@@ -193,7 +193,7 @@ export default function HomePage() {
     }, 1000);
   }, [queryClient, address, router]);
 
-  // Don't render anything if we're reloading to prevent flash
+  // Don't render anything if we're reloading - initial loading screen handles this
   if (isReloading) {
     return null;
   }

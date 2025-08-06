@@ -5,7 +5,13 @@ import { usePathname } from "next/navigation";
 import s from "./progress-bar.module.scss";
 
 export const GlobalProgressBar = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  // Check immediately on mount if we should show progress bar
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window !== "undefined") {
+      return !!sessionStorage.getItem("isNavigating");
+    }
+    return false;
+  });
   const [progress, setProgress] = useState(0);
   const pathname = usePathname();
 
@@ -27,6 +33,10 @@ export const GlobalProgressBar = () => {
       }, 50);
 
       // Complete progress and hide after navigation
+      // Use longer timeout for reload cases
+      const isReloading = sessionStorage.getItem("navigatedFromHome");
+      const timeoutDuration = isReloading ? 1000 : 300;
+
       const timeout = setTimeout(() => {
         setProgress(100);
         setTimeout(() => {
@@ -34,7 +44,7 @@ export const GlobalProgressBar = () => {
           setProgress(0);
           sessionStorage.removeItem("isNavigating");
         }, 200);
-      }, 300);
+      }, timeoutDuration);
 
       return () => {
         clearInterval(interval);
