@@ -1,0 +1,29 @@
+// Global progress bar for all page navigations
+.progressBarContainer {
+  position: fixed;
+  top: 60px; // Below the header (header height is 60px)
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #1e40af, #60a5fa);
+  background-size: 200% 100%;
+  animation: progressShine 1s ease-in-out infinite;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+
+  @keyframes progressShine {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}

@@ -189,7 +189,18 @@ export const Header = () => {
             <HeliosLogo />
           </a>
           <div className={s.divider}></div>
-          <Link href="/" className={s.chronosSection}>
+          <Link
+            href="/"
+            className={s.chronosSection}
+            onClick={() => {
+              // Mark navigation for progress bar
+              sessionStorage.setItem("isNavigating", "true");
+              // Mark that we're navigating back to home if we're not already there
+              if (pathname !== "/") {
+                sessionStorage.setItem("navigatedFromHome", "true");
+              }
+            }}
+          >
             <ChronosIcon />
             <span className={s.chronosText}>Chronos</span>
           </Link>
@@ -201,6 +212,14 @@ export const Header = () => {
               className={`${s.navLink} ${
                 pathname === "/" ? s.navLinkActive : ""
               }`}
+              onClick={() => {
+                // Mark navigation for progress bar
+                sessionStorage.setItem("isNavigating", "true");
+                // Mark that we're navigating back to home if we're not already there
+                if (pathname !== "/") {
+                  sessionStorage.setItem("navigatedFromHome", "true");
+                }
+              }}
             >
               <svg
                 className={s.navIcon}
@@ -220,6 +239,14 @@ export const Header = () => {
               className={`${s.navLink} ${
                 pathname === "/schedule" ? s.navLinkActive : ""
               }`}
+              onClick={() => {
+                // Mark navigation for progress bar
+                sessionStorage.setItem("isNavigating", "true");
+                // Mark that we're navigating away from home if we're currently on home
+                if (pathname === "/") {
+                  sessionStorage.setItem("navigatedFromHome", "true");
+                }
+              }}
             >
               <svg
                 className={s.navIcon}

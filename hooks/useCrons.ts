@@ -83,8 +83,10 @@ export const useCrons = () => {
         pageSize: 50, // Get more crons per request
       }),
     enabled: isConnected && !!address,
-    staleTime: 30000, // 30 seconds
+    staleTime: 0, // Always consider data stale to force refetch
     gcTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnMount: true, // Always refetch when component mounts
+    refetchOnWindowFocus: false, // Keep this false as per global config
   });
 };
 

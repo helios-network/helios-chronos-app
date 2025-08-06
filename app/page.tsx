@@ -8,7 +8,10 @@ import s from "./page.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { useAccount } from "wagmi";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const HeliosIcon = () => (
   <Image
@@ -138,17 +141,62 @@ const CronStatistics = () => {
 };
 
 export default function HomePage() {
+  const [isReloading, setIsReloading] = useState(false);
   const queryClient = useQueryClient();
+  const { address } = useAccount();
+  const router = useRouter();
+
+  useLayoutEffect(() => {
+    // Check if we're coming back from another page by looking at sessionStorage
+    const isReturningToHome = sessionStorage.getItem("navigatedFromHome");
+
+    if (isReturningToHome) {
+      console.log("Returning to home page - reloading to reset animations");
+      sessionStorage.removeItem("navigatedFromHome");
+
+      // Hide page content immediately to prevent flash
+      setIsReloading(true);
+
+      // Reload immediately - no delay needed since content is hidden
+      window.location.reload();
+      return;
+    }
+  }, []);
 
   useEffect(() => {
-    // Invalidate and refetch cron statistics when the home page mounts
-    // This ensures fresh data is loaded when navigating back from other pages
-    console.log("HomePage mounted - invalidating cronStatistics query");
-    queryClient.invalidateQueries({ queryKey: ["cronStatistics"] });
+    // Normal page load - invalidate and refetch data
+    console.log("HomePage mounted - invalidating queries");
 
-    // Also refetch to ensure immediate update
+    // Show a subtle toast to indicate data refresh
+    toast.loading("Refreshing data...", {
+      id: "home-refresh",
+      duration: 2000,
+    });
+
+    // Invalidate cron statistics
+    queryClient.invalidateQueries({ queryKey: ["cronStatistics"] });
     queryClient.refetchQueries({ queryKey: ["cronStatistics"] });
-  }, [queryClient]);
+
+    // Invalidate cron list if user is connected
+    if (address) {
+      console.log("Invalidating cron list for address:", address);
+      queryClient.invalidateQueries({ queryKey: ["crons", address] });
+      queryClient.refetchQueries({ queryKey: ["crons", address] });
+    }
+
+    // Show success after a short delay
+    setTimeout(() => {
+      toast.success("Data refreshed!", {
+        id: "home-refresh",
+        duration: 1500,
+      });
+    }, 1000);
+  }, [queryClient, address, router]);
+
+  // Don't render anything if we're reloading to prevent flash
+  if (isReloading) {
+    return null;
+  }
 
   return (
     <div className={s.container}>
@@ -168,7 +216,16 @@ export default function HomePage() {
             contract executions with precision and reliability.
           </p>
           <div className={s.actions}>
-            <Link href="/schedule" className={s.scheduleButton}>
+            <Link
+              href="/schedule"
+              className={s.scheduleButton}
+              onClick={() => {
+                // Mark navigation for progress bar
+                sessionStorage.setItem("isNavigating", "true");
+                // Mark that we're navigating away from home
+                sessionStorage.setItem("navigatedFromHome", "true");
+              }}
+            >
               <svg
                 className={s.scheduleIcon}
                 viewBox="0 0 24 24"
