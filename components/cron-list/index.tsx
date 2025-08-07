@@ -138,6 +138,14 @@ export const CronList = () => {
   if (!isConnected) {
     return (
       <div className={s.container}>
+        <div className={s.sectionHeader}>
+          <Heading level={2} size="medium" className={s.sectionHeading}>
+            Your Automated Tasks
+          </Heading>
+          <p className={s.sectionDescription}>
+            Manage and monitor your scheduled smart contract executions
+          </p>
+        </div>
         <Card className={s.emptyState}>
           <Heading level={2} size="medium">
             Connect Your Wallet
@@ -154,10 +162,13 @@ export const CronList = () => {
   if (isLoading) {
     return (
       <div className={s.container}>
-        <div className={s.header}>
-          <Heading level={1} size="large">
+        <div className={s.sectionHeader}>
+          <Heading level={2} size="medium" className={s.sectionHeading}>
             Your Automated Tasks
           </Heading>
+          <p className={s.sectionDescription}>
+            Manage and monitor your scheduled smart contract executions
+          </p>
         </div>
         <div className={s.loadingCenter}>
           <div className={s.spinner}></div>
@@ -170,10 +181,13 @@ export const CronList = () => {
   if (error) {
     return (
       <div className={s.container}>
-        <div className={s.header}>
-          <Heading level={1} size="large">
+        <div className={s.sectionHeader}>
+          <Heading level={2} size="medium" className={s.sectionHeading}>
             Your Automated Tasks
           </Heading>
+          <p className={s.sectionDescription}>
+            Manage and monitor your scheduled smart contract executions
+          </p>
         </div>
         <Card className={s.errorState}>
           <Heading level={2} size="medium">
@@ -206,29 +220,39 @@ export const CronList = () => {
 
   return (
     <div className={s.container}>
-      <div className={s.header}>
-        <Heading level={1} size="large">
+      <div className={s.sectionHeader}>
+        <Heading level={2} size="medium" className={s.sectionHeading}>
           Your Automated Tasks
         </Heading>
-        <div className={s.headerInfo}>
-          <span>
-            Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
-          </span>
-          <Button
-            variant="outline"
-            onClick={() => refetch()}
-            disabled={isFetching}
-          >
-            {isFetching ? (
-              <>
-                <div className={s.buttonSpinner}></div>
-                Refreshing...
-              </>
-            ) : (
-              "Refresh"
-            )}
-          </Button>
+        <p className={s.sectionDescription}>
+          Manage and monitor your scheduled smart contract executions
+        </p>
+      </div>
+
+      <div className={s.walletStatus}>
+        <div className={s.statusInfo}>
+          <div className={s.walletBadge}>
+            <div className={s.statusDot}></div>
+            <span>
+              Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
+            </span>
+          </div>
         </div>
+        <Button
+          variant="outline"
+          onClick={() => refetch()}
+          disabled={isFetching}
+          className={s.refreshButton}
+        >
+          {isFetching ? (
+            <>
+              <div className={s.buttonSpinner}></div>
+              Refreshing...
+            </>
+          ) : (
+            "Refresh"
+          )}
+        </Button>
       </div>
 
       {crons.length === 0 ? (

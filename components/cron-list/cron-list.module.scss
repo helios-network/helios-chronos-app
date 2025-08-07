@@ -1,33 +1,93 @@
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--spacing-l);
+  margin: 0;
+  padding: 0;
 }
 
-.header {
+.sectionHeader {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.sectionHeading {
+  color: #1e3a8a;
+  font-size: 2.25rem;
+  font-weight: 700;
+  position: relative;
+  margin-bottom: var(--spacing-m);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #1e3a8a);
+    border-radius: 2px;
+  }
+}
+
+.sectionDescription {
+  color: #64748b;
+  font-size: 1rem;
+  margin: 0 auto var(--spacing-m);
+  max-width: 600px;
+}
+
+.walletStatus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-2xl);
-  padding-bottom: var(--spacing-l);
-  border-bottom: 1px solid var(--border-light);
-  flex-wrap: wrap;
-  gap: var(--spacing-m);
+  margin: var(--spacing-l) 0;
+  padding: var(--spacing-m) var(--spacing-l);
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(10px);
 }
 
-.headerInfo {
+.statusInfo {
   display: flex;
   align-items: center;
   gap: var(--spacing-m);
-  font-size: 14px;
-  color: var(--text-secondary);
+}
 
-  span {
-    background: var(--background-medium);
-    padding: var(--spacing-s) var(--spacing-m);
-    border-radius: var(--radius-md);
-    font-weight: 500;
+.walletBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: var(--spacing-s) var(--spacing-m);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #059669;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.refreshButton {
+  white-space: nowrap;
 }
 
 .loadingCenter {
@@ -221,17 +281,22 @@
     padding: 16px;
   }
 
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
+  .sectionHeading {
+    font-size: 1.875rem;
   }
 
   .cronGrid {
     grid-template-columns: 1fr;
   }
 
-  .headerInfo {
-    width: 100%;
-    justify-content: space-between;
+  .walletStatus {
+    flex-direction: column;
+    gap: var(--spacing-m);
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .walletBadge {
+    justify-content: center;
   }
 }

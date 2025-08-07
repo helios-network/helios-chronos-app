@@ -132,3 +132,48 @@ export const useCronStatistics = () => {
     refetchOnWindowFocus: false, // Keep this false as per global config
   });
 };
+
+// Hook to get all cron transaction receipts by block number
+export const useCronTransactionReceipts = (blockNumber: string = "latest") => {
+  const fetchCronReceipts = async () => {
+    console.log("Fetching cron transaction receipts for block:", blockNumber);
+    const rpcUrl = getRpcUrl();
+
+    const response = await fetch(rpcUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        method: "eth_getAllCronTransactionReceiptsByBlockNumber",
+        params: [blockNumber],
+        id: 1,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (data.error) {
+      throw new Error(
+        data.error.message || "Failed to fetch cron transaction receipts"
+      );
+    }
+
+    console.log("Cron transaction receipts fetched:", data.result);
+    return data.result || [];
+  };
+
+  return useQuery({
+    queryKey: ["cronTransactionReceipts", blockNumber],
+    queryFn: fetchCronReceipts,
+    staleTime: 0, // Always consider data stale to force refetch
+    gcTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnMount: true, // Always refetch when component mounts
+    refetchOnWindowFocus: false, // Keep this false as per global config
+  });
+};

@@ -1,6 +1,7 @@
 "use client";
 
 import { CronList } from "@/components/cron-list";
+import { CronReceipts } from "@/components/cron-receipts";
 import { Card } from "@/components/card";
 import { Heading } from "@/components/heading";
 import { useCronStatistics } from "@/hooks/useCrons";
@@ -177,6 +178,10 @@ export default function HomePage() {
     queryClient.invalidateQueries({ queryKey: ["cronStatistics"] });
     queryClient.refetchQueries({ queryKey: ["cronStatistics"] });
 
+    // Invalidate cron transaction receipts
+    queryClient.invalidateQueries({ queryKey: ["cronTransactionReceipts"] });
+    queryClient.refetchQueries({ queryKey: ["cronTransactionReceipts"] });
+
     // Invalidate cron list if user is connected
     if (address) {
       console.log("Invalidating cron list for address:", address);
@@ -246,8 +251,15 @@ export default function HomePage() {
       </header>
 
       <div className={s.content}>
-        <CronStatistics />
-        <CronList />
+        <Card className={s.sectionCard}>
+          <CronStatistics />
+        </Card>
+        <Card className={s.sectionCard}>
+          <CronList />
+        </Card>
+        <Card className={s.sectionCard}>
+          <CronReceipts />
+        </Card>
       </div>
     </div>
   );
