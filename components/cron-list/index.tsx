@@ -31,15 +31,15 @@ const getExecutionStageColor = (stage: ExecutionStage): string => {
     case ExecutionStage.PENDING:
       return "#f59e0b";
     case ExecutionStage.EXECUTING:
-      return "#3b82f6";
+      return "#002DCB";
     case ExecutionStage.COMPLETED:
       return "#10b981";
     case ExecutionStage.FAILED:
       return "#ef4444";
     case ExecutionStage.EXPIRED:
-      return "#6b7280";
+      return "#828DB3";
     default:
-      return "#6b7280";
+      return "#828DB3";
   }
 };
 
@@ -147,13 +147,37 @@ export const CronList = () => {
           </p>
         </div>
         <Card className={s.emptyState}>
-          <Heading level={2} size="medium">
-            Connect Your Wallet
+          <div className={s.walletIcon}>
+            <svg viewBox="0 0 24 24" width="64" height="64">
+              <path
+                d="M19 7h-1V6a3 3 0 00-3-3H5a3 3 0 00-3 3v12a3 3 0 003 3h14a3 3 0 003-3v-8a3 3 0 00-3-3zm-1 9a1 1 0 01-1 1h-1a1 1 0 01-1-1v-2a1 1 0 011-1h2a1 1 0 011 1v2z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+          <Heading level={2} size="medium" className={s.emptyStateTitle}>
+            Wallet Connection Required
           </Heading>
-          <p>
-            Please connect your wallet to view your automated tasks. Use the
-            connect button in the header above.
+          <p className={s.emptyStateMessage}>
+            Connect your wallet to view and manage your automated blockchain
+            tasks. Your crons will appear here once connected.
           </p>
+          <div className={s.connectInstructions}>
+            <div className={s.instructionStep}>
+              <div className={s.stepNumber}>1</div>
+              <span>
+                Click the "Connect Wallet" button in the top navigation
+              </span>
+            </div>
+            <div className={s.instructionStep}>
+              <div className={s.stepNumber}>2</div>
+              <span>Select your preferred wallet provider</span>
+            </div>
+            <div className={s.instructionStep}>
+              <div className={s.stepNumber}>3</div>
+              <span>Authorize the connection to view your crons</span>
+            </div>
+          </div>
         </Card>
       </div>
     );
@@ -257,10 +281,18 @@ export const CronList = () => {
 
       {crons.length === 0 ? (
         <Card className={s.emptyState}>
-          <Heading level={2} size="medium">
+          <div className={s.emptyIcon}>
+            <svg viewBox="0 0 24 24" width="64" height="64">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+          <Heading level={2} size="medium" className={s.emptyStateTitle}>
             No Automated Tasks Found
           </Heading>
-          <p>
+          <p className={s.emptyStateMessage}>
             You don&apos;t have any automated tasks (crons) set up yet. Create
             your first cron to start automating blockchain interactions.
           </p>

@@ -21,7 +21,7 @@
   bottom: 0;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(37, 99, 235, 0.15);
+  border-bottom: 1px solid rgba(0, 45, 203, 0.15);
   z-index: -1;
 
   &::before {
@@ -33,7 +33,7 @@
     height: 200px;
     background: radial-gradient(
       circle,
-      rgba(59, 130, 246, 0.15) 0%,
+      rgba(0, 45, 203, 0.15) 0%,
       transparent 70%
     );
     border-radius: 50%;
@@ -49,7 +49,7 @@
     height: 150px;
     background: radial-gradient(
       circle,
-      rgba(59, 130, 246, 0.1) 0%,
+      rgba(0, 45, 203, 0.1) 0%,
       transparent 70%
     );
     border-radius: 50%;
@@ -88,7 +88,7 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(59, 130, 246, 0.2),
+      rgba(0, 45, 203, 0.2),
       transparent
     );
     opacity: 0;
@@ -199,7 +199,7 @@
   font-size: 22px;
   font-weight: 800;
   font-family: "Montserrat", system-ui, -apple-system, sans-serif;
-  background: linear-gradient(90deg, #1e40af, #3b82f6);
+  background: linear-gradient(90deg, #001ba3, #002dcb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -340,7 +340,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  background: linear-gradient(135deg, #001ba3 0%, #002dcb 100%);
   color: white;
   border: none;
   padding: 8px 16px;

@@ -10,7 +10,7 @@
 }
 
 .icon {
-  color: #3b82f6;
+  color: var(--primary-medium);
   margin-bottom: 1.5rem;
   animation: pulse 2s infinite;
 }
@@ -34,15 +34,36 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
-  color: #007cf8;
+  color: var(--text-primary);
 }
 
 .message {
   font-size: 1rem;
-  color: #94a3b8;
+  color: var(--text-secondary);
   margin-bottom: 2rem;
 }
 
 .button {
   min-width: 180px;
+  margin-bottom: 20px;
+}
+
+.securityNote {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  background: var(--background-medium);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  span {
+    font-weight: 500;
+  }
 }

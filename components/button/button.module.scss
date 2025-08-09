@@ -63,13 +63,13 @@
   box-shadow: none;
 
   &:hover:not(.disabled) {
-    background-color: rgba(99, 102, 241, 0.05);
+    background-color: rgba(0, 45, 203, 0.05);
     border-color: var(--primary-dark);
     color: var(--primary-dark);
   }
 
   &:active:not(.disabled) {
-    background-color: rgba(99, 102, 241, 0.1);
+    background-color: rgba(0, 45, 203, 0.1);
   }
 }
 

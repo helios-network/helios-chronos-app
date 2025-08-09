@@ -44,7 +44,7 @@ export default async function RootLayout({
               left: 0;
               right: 0;
               bottom: 0;
-              background: var(--background-secondary, #f8fafc);
+              background: var(--background-secondary, #E2EBFF);
               display: none;
               align-items: center;
               justify-content: center;
@@ -57,14 +57,14 @@ export default async function RootLayout({
             
             .initial-loading-content {
               text-align: center;
-              color: #64748b;
+              color: #5C6584;
             }
             
             .initial-loading-spinner {
               width: 40px;
               height: 40px;
-              border: 3px solid rgba(59, 130, 246, 0.2);
-              border-top: 3px solid #3b82f6;
+              border: 3px solid rgba(0, 45, 203, 0.2);
+              border-top: 3px solid #002DCB;
               border-radius: 50%;
               animation: initial-spin 1s linear infinite;
               margin: 0 auto 1rem;
@@ -102,11 +102,11 @@ export default async function RootLayout({
             
             .initial-progress-bar {
               height: 100%;
-              background: linear-gradient(90deg, #3b82f6, #1e40af, #60a5fa);
+              background: linear-gradient(90deg, #002DCB, #001ba3, #1a47d4);
               background-size: 200% 100%;
               animation: initial-progress-shine 1s ease-in-out infinite;
               transition: width 0.3s ease;
-              box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+              box-shadow: 0 0 10px rgba(0, 45, 203, 0.5);
               width: 0%;
             }
             

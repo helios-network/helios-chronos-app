@@ -1,20 +1,20 @@
 // CSS Variables for Helios Design System
 :root {
-  // Colors - Helios Theme (Strong Blue)
-  --primary-medium: #2563eb;
-  --primary-light: #3b82f6;
-  --primary-dark: #1d4ed8;
+  // Colors - Helios Theme (Updated Palette)
+  --primary-medium: #002dcb;
+  --primary-light: #1a47d4;
+  --primary-dark: #001ba3;
 
-  --text-primary: #111827;
-  --text-secondary: #6b7280;
-  --text-muted: #9ca3af;
+  --text-primary: #040f34;
+  --text-secondary: #5c6584;
+  --text-muted: #828db3;
 
   --background-primary: #ffffff;
-  --background-secondary: #f9fafb;
-  --background-medium: #f3f4f6;
+  --background-secondary: #e2ebff;
+  --background-medium: #d4e1ff;
 
-  --border-light: #e5e7eb;
-  --border-medium: #d1d5db;
+  --border-light: #c7d2fe;
+  --border-medium: #a5b4fc;
 
   --success: #10b981;
   --warning: #f59e0b;
@@ -84,7 +84,7 @@ svg {
 
 // Selection styles
 ::selection {
-  background-color: rgba(99, 102, 241, 0.2);
+  background-color: rgba(0, 45, 203, 0.2);
   color: var(--primary-dark);
 }
 
@@ -109,7 +109,7 @@ svg {
 
 // AppKit overrides
 w3m-button {
-  --w3m-accent: #2563eb;
-  --w3m-color-mix: #2563eb;
+  --w3m-accent: #002dcb;
+  --w3m-color-mix: #002dcb;
   --w3m-color-mix-strength: 20%;
 }

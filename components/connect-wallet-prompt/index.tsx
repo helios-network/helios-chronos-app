@@ -33,6 +33,15 @@ export const ConnectWalletPrompt = ({
       <Button onClick={handleConnect} className={s.button}>
         Connect Wallet
       </Button>
+      <div className={s.securityNote}>
+        <svg viewBox="0 0 24 24" width="16" height="16">
+          <path
+            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"
+            fill="currentColor"
+          />
+        </svg>
+        <span>Your wallet connection is secure and encrypted</span>
+      </div>
     </Card>
   );
 };

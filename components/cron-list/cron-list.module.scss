@@ -9,7 +9,7 @@
 }
 
 .sectionHeading {
-  color: #1e3a8a;
+  color: var(--primary-medium);
   font-size: 2.25rem;
   font-weight: 700;
   position: relative;
@@ -23,13 +23,17 @@
     transform: translateX(-50%);
     width: 80px;
     height: 3px;
-    background: linear-gradient(90deg, #3b82f6, #1e3a8a);
+    background: linear-gradient(
+      90deg,
+      var(--primary-medium),
+      var(--primary-dark)
+    );
     border-radius: 2px;
   }
 }
 
 .sectionDescription {
-  color: #64748b;
+  color: var(--text-secondary);
   font-size: 1rem;
   margin: 0 auto var(--spacing-m);
   max-width: 600px;
@@ -41,8 +45,8 @@
   align-items: center;
   margin: var(--spacing-l) 0;
   padding: var(--spacing-m) var(--spacing-l);
-  background: rgba(59, 130, 246, 0.05);
-  border: 1px solid rgba(59, 130, 246, 0.1);
+  background: rgba(0, 45, 203, 0.05);
+  border: 1px solid rgba(0, 45, 203, 0.1);
   border-radius: var(--radius-md);
   backdrop-filter: blur(10px);
 }
@@ -148,12 +152,100 @@
   }
 
   p {
-    color: #6b7280;
+    color: var(--text-secondary);
     margin-bottom: 24px;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.walletIcon,
+.emptyIcon {
+  color: var(--primary-medium);
+  margin-bottom: 24px;
+  animation: pulse-wallet 2s infinite;
+  display: flex;
+  justify-content: center;
+}
+
+.emptyIcon {
+  color: var(--text-muted);
+  animation: none;
+}
+
+@keyframes pulse-wallet {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+.emptyStateTitle {
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.emptyStateMessage {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.connectInstructions {
+  background: var(--background-medium);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-top: 24px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.instructionStep {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  span {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+}
+
+.stepNumber {
+  background: var(--primary-medium);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-shrink: 0;
 }
 
 .errorDetails {
@@ -216,12 +308,12 @@
 
   .label {
     font-size: 14px;
-    color: #6b7280;
+    color: var(--text-muted);
   }
 
   .value {
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
   }
 }
 
@@ -248,13 +340,13 @@
 
   .label {
     font-size: 14px;
-    color: #6b7280;
+    color: var(--text-muted);
     font-weight: 500;
   }
 
   .value {
     font-size: 14px;
-    color: #111827;
+    color: var(--text-primary);
     font-weight: 400;
     text-align: right;
     max-width: 200px;

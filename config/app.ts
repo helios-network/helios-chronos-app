@@ -2,9 +2,9 @@ import { env } from "@/env";
 
 export const APP_NAME = "Chronos App";
 
-export const APP_COLOR_PRIMARY = "#6366f1";
-export const APP_COLOR_SECONDARY = "rgba(99, 102, 241, 0.8)";
-export const APP_COLOR_DEFAULT = "#ddd";
+export const APP_COLOR_PRIMARY = "#002DCB";
+export const APP_COLOR_SECONDARY = "rgba(0, 45, 203, 0.8)";
+export const APP_COLOR_DEFAULT = "#828DB3";
 export const APP_THEME_COLOR = APP_COLOR_PRIMARY;
 
 export const APP_BASE_URL =
