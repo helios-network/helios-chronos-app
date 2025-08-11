@@ -345,6 +345,9 @@ export const useCreateCron = () => {
         const frequency = BigInt(cronParams.frequency);
         const gasLimit = BigInt(cronParams.gasLimit);
         // Add a small buffer to avoid edge cases with block synchronization
+        if (currentBlock === undefined) {
+          throw new Error("Current block number is undefined");
+        }
         const expirationBlock =
           currentBlock + BigInt(cronParams.expirationBlocks) + BigInt(10);
 

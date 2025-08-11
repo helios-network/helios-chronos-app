@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card } from "@/components/card";
 import { Heading } from "@/components/heading";
 import { Button } from "@/components/button";
-import { Input } from "@/components/input";
+
 import { useCronTransactionReceipts } from "@/hooks/useCrons";
 import { CronTransactionReceipt } from "@/types/cron";
 import { toast } from "sonner";
@@ -170,8 +170,9 @@ const ReceiptCard = ({ receipt }: ReceiptCardProps) => {
                 }
                 onClick={(e) => {
                   e.stopPropagation();
-                  receipt.contractAddress &&
+                  if (receipt.contractAddress) {
                     copyToClipboard(receipt.contractAddress);
+                  }
                 }}
               >
                 {receipt.contractAddress || "N/A"}

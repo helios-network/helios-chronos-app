@@ -767,8 +767,8 @@ export const CronScheduler = () => {
               </div>
             </div>
             <p className={s.costNote}>
-              💡 You can add more funds anytime by sending HLS to your task's
-              wallet address
+              💡 You can add more funds anytime by sending HLS to your
+              task&apos;s wallet address
             </p>
           </Card>
 

@@ -41,7 +41,7 @@ const StatsCard = ({
 );
 
 const CronStatistics = () => {
-  const { data: stats, isLoading, error, isFetching } = useCronStatistics();
+  const { data: stats, isLoading, error } = useCronStatistics();
 
   // Show loading state only on initial load, not during refetch
   if (isLoading && !stats) {

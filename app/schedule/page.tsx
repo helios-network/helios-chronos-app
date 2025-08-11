@@ -119,7 +119,8 @@ export default function SchedulePage() {
                 <div className={s.instructionStep}>
                   <div className={s.stepNumber}>1</div>
                   <span>
-                    Click the "Connect Wallet" button in the top navigation
+                    Click the &quot;Connect Wallet&quot; button in the top
+                    navigation
                   </span>
                 </div>
                 <div className={s.instructionStep}>
