@@ -48,7 +48,6 @@ Edit `.env.local` and add your configuration:
 ```
 NEXT_PUBLIC_NODE_ENV=development
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
-NEXT_PUBLIC_INFURA_KEY=your_infura_key_here
 NEXT_PUBLIC_PROJECT_ID=your_reown_project_id_here
 ```
 
