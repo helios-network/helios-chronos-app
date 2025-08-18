@@ -4,17 +4,19 @@
   justify-content: center;
   gap: var(--spacing-s);
   border: none;
-  border-radius: var(--radius-md);
-  font-weight: 500;
+  border-radius: 999px; /* pill shape */
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease, color 0.15s ease;
   text-decoration: none;
   font-family: var(--font-main);
   box-shadow: var(--shadow-sm);
 
   &:focus {
-    outline: 2px solid var(--primary-medium);
-    outline-offset: 2px;
+    outline: none;
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--primary-medium) 25%, transparent);
   }
 
   &.disabled {
@@ -26,11 +28,14 @@
 
 // Variants
 .primary {
-  background-color: var(--primary-medium);
+  background: linear-gradient(
+    90deg,
+    var(--primary-dark),
+    var(--primary-medium)
+  );
   color: white;
 
   &:hover:not(.disabled) {
-    background-color: var(--primary-dark);
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
   }
@@ -42,17 +47,25 @@
 }
 
 .secondary {
-  background-color: var(--background-medium);
+  background-color: color-mix(
+    in srgb,
+    var(--background-medium) 55%,
+    transparent
+  );
   color: var(--text-primary);
   border: 1px solid var(--border-light);
 
   &:hover:not(.disabled) {
-    background-color: var(--border-light);
+    background-color: color-mix(
+      in srgb,
+      var(--background-medium) 70%,
+      transparent
+    );
     border-color: var(--border-medium);
   }
 
   &:active:not(.disabled) {
-    background-color: var(--border-medium);
+    background-color: var(--background-medium);
   }
 }
 
@@ -63,13 +76,17 @@
   box-shadow: none;
 
   &:hover:not(.disabled) {
-    background-color: rgba(0, 45, 203, 0.05);
+    background-color: color-mix(in srgb, var(--primary-medium) 8%, transparent);
     border-color: var(--primary-dark);
     color: var(--primary-dark);
   }
 
   &:active:not(.disabled) {
-    background-color: rgba(0, 45, 203, 0.1);
+    background-color: color-mix(
+      in srgb,
+      var(--primary-medium) 14%,
+      transparent
+    );
   }
 }
 
@@ -90,19 +107,19 @@
 
 // Sizes
 .small {
-  padding: 8px 12px;
-  font-size: 14px;
-  min-height: 32px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  min-height: 36px;
 }
 
 .medium {
-  padding: 12px 16px;
-  font-size: 16px;
+  padding: 10px 16px;
+  font-size: 1rem;
   min-height: 40px;
 }
 
 .large {
-  padding: 16px 24px;
-  font-size: 18px;
+  padding: 14px 22px;
+  font-size: 1.1rem;
   min-height: 48px;
 }

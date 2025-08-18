@@ -12,11 +12,17 @@
 
 .progressBar {
   height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #1e40af, #60a5fa);
+  background: linear-gradient(
+    90deg,
+    var(--primary-medium),
+    var(--primary-dark),
+    var(--primary-light)
+  );
   background-size: 200% 100%;
   animation: progressShine 1s ease-in-out infinite;
   transition: width 0.3s ease;
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 10px
+    color-mix(in srgb, var(--primary-medium) 50%, transparent);
 
   @keyframes progressShine {
     0% {

@@ -1,3 +1,5 @@
+/* Modernized Helios Header Styles (keeps structure/classes) */
+
 .header {
   position: fixed;
   top: 0;
@@ -15,134 +17,69 @@
 
 .headerBackground {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(0, 45, 203, 0.15);
+  inset: 0;
+  /* Subtle translucent surface with blur */
+  background: color-mix(in srgb, var(--background-primary) 92%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-light);
   z-index: -1;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: -80px;
-    right: -80px;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(
-      circle,
-      rgba(0, 45, 203, 0.15) 0%,
-      transparent 70%
-    );
-    border-radius: 50%;
-    z-index: -1;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -60px;
-    left: 30%;
-    width: 150px;
-    height: 150px;
-    background: radial-gradient(
-      circle,
-      rgba(0, 45, 203, 0.1) 0%,
-      transparent 70%
-    );
-    border-radius: 50%;
-    z-index: -1;
-  }
 }
 
 .headerContent {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 var(--spacing-l);
   height: 100%;
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
   position: relative;
 
   @media (max-width: 768px) {
-    padding: 0 16px;
+    padding: 0 var(--spacing-m);
   }
 }
 
 .logoSection {
   display: flex;
   align-items: center;
-  gap: 16px;
-  position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0, 45, 203, 0.2),
-      transparent
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover::after {
-    opacity: 1;
-  }
-
-  @media (max-width: 768px) {
-    gap: 12px;
-  }
+  gap: var(--spacing-m);
 }
 
 .heliosLogoLink {
   display: flex;
   align-items: center;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease;
 
   &:hover {
-    opacity: 0.8;
+    opacity: 0.85;
   }
 }
 
 .logo {
-  height: 30px;
+  height: 28px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-  }
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08));
 
   @media (max-width: 768px) {
-    height: 26px;
+    height: 24px;
   }
 }
 
 .divider {
   width: 1px;
-  height: 28px;
+  height: 24px;
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(59, 130, 246, 0.3),
+    var(--border-medium),
     transparent
   );
-  margin: 0 4px;
+  margin: 0 var(--spacing-s);
 
   @media (max-width: 768px) {
-    height: 24px;
+    height: 22px;
   }
 }
 
@@ -150,86 +87,50 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  position: relative;
   padding: 6px 10px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s ease, transform 0.2s ease;
   text-decoration: none;
   cursor: pointer;
 
   &:hover {
-    background: rgba(59, 130, 246, 0.08);
+    background: color-mix(in srgb, var(--border-light) 30%, transparent);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
-
-    .chronosIcon {
-      transform: rotate(15deg) scale(1.05);
-      animation-play-state: paused;
-    }
-
-    .chronosText::after {
-      opacity: 1;
-    }
   }
 }
 
 .chronosIcon {
-  width: 24px;
-  height: 24px;
-  transition: transform 0.5s ease;
-  filter: drop-shadow(0 0 2px rgba(59, 130, 246, 0.3));
-  animation: pulse-icon 3s ease-in-out infinite alternate;
-
-  @keyframes pulse-icon {
-    0% {
-      filter: drop-shadow(0 0 1px rgba(59, 130, 246, 0.2));
-    }
-    100% {
-      filter: drop-shadow(0 0 3px rgba(59, 130, 246, 0.4));
-    }
-  }
+  width: 22px;
+  height: 22px;
+  transition: transform 0.35s ease;
+  color: var(--primary-medium);
 
   @media (max-width: 768px) {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 }
 
+.chronosSection:hover .chronosIcon {
+  transform: rotate(8deg) scale(1.03);
+}
+
 .chronosText {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   font-family: "Montserrat", system-ui, -apple-system, sans-serif;
-  background: linear-gradient(90deg, #001ba3, #002dcb);
+  background: linear-gradient(
+    90deg,
+    var(--primary-dark),
+    var(--primary-medium)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.03em;
-  transition: all 0.3s ease;
-  position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(59, 130, 246, 0.3),
-      transparent
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover::after {
-    opacity: 1;
-  }
+  letter-spacing: -0.02em;
 
   @media (max-width: 768px) {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -243,7 +144,7 @@
 .navLinks {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 
   @media (max-width: 768px) {
     display: none;
@@ -251,73 +152,52 @@
 }
 
 .navLink {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #4b5563;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
   text-decoration: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
+  padding: 8px 12px;
+  border-radius: 999px; /* pill */
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
   position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #3b82f6, #1e40af);
-    transform: translateX(-50%);
-    transition: width 0.3s ease;
-    border-radius: 2px;
-  }
+  border: 1px solid transparent;
 
   &:hover {
-    color: #1e40af;
-    background: rgba(59, 130, 246, 0.05);
-
-    &::after {
-      width: 80%;
-    }
+    color: var(--primary-dark);
+    background: color-mix(in srgb, var(--background-medium) 45%, transparent);
+    border-color: var(--border-light);
+    transform: translateY(-1px);
   }
 }
 
 .navLinkActive {
-  color: #1e40af;
-  background: rgba(59, 130, 246, 0.08);
-  font-weight: 600;
-
-  &::after {
-    width: 80%;
-  }
+  color: var(--primary-dark);
+  background: color-mix(in srgb, var(--background-medium) 55%, transparent);
+  border-color: var(--border-medium);
 
   .navIcon {
-    color: #1e40af;
-    transform: scale(1.1);
+    color: var(--primary-dark);
+    transform: none;
   }
 }
 
 .navIcon {
-  color: #3b82f6;
-  transition: transform 0.3s ease;
+  color: var(--primary-medium);
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .navLinkDisabled {
   opacity: 0.6;
   cursor: not-allowed;
-  position: relative;
 
   &:hover {
     background: none !important;
-    color: #4b5563 !important;
-
-    &::after {
-      width: 0 !important;
-    }
+    color: var(--text-secondary) !important;
+    border-color: transparent !important;
+    transform: none;
   }
 }
 
@@ -325,70 +205,52 @@
   position: absolute;
   top: -6px;
   right: -10px;
-  background: #3b82f6;
+  background: var(--primary-medium);
   color: white;
   font-size: 9px;
-  font-weight: 600;
-  padding: 2px 4px;
-  border-radius: 4px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
+/* Wallet */
 .walletButton {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #001ba3 0%, #002dcb 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark) 0%,
+    var(--primary-medium) 100%
+  );
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 10px rgba(59, 130, 246, 0.2);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-      circle at top right,
-      rgba(255, 255, 255, 0.2) 0%,
-      transparent 70%
-    );
-    opacity: 0.5;
-    transition: all 0.3s ease;
-  }
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 
   .walletIcon {
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
   }
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 0 15px rgba(59, 130, 246, 0.3);
-
-    &::before {
-      opacity: 0.15;
-      transform: scale(1.05);
-    }
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
 
     .walletIcon {
-      transform: rotate(10deg);
+      transform: rotate(8deg);
     }
   }
 
   &:active {
     transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 10px rgba(59, 130, 246, 0.2);
+    box-shadow: var(--shadow-sm);
   }
 }
 
@@ -406,39 +268,17 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(59, 130, 246, 0.08);
+  background: color-mix(in srgb, var(--background-medium) 55%, transparent);
   padding: 6px 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 10px rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
 
   &:hover {
-    background: rgba(59, 130, 246, 0.12);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08), 0 0 15px rgba(59, 130, 246, 0.15);
-    transform: translateY(-2px);
-
-    .addressDot {
-      animation: pulse-dot 1.5s infinite;
-    }
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(59, 130, 246, 0.03) 0%,
-      rgba(30, 64, 175, 0.05) 100%
-    );
-    opacity: 1;
-    transition: opacity 0.3s ease;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
 
   @media (max-width: 768px) {
@@ -449,29 +289,15 @@
 .addressDot {
   width: 8px;
   height: 8px;
-  background: #10b981;
+  background: var(--success);
   border-radius: 50%;
-  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
-
-  @keyframes pulse-dot {
-    0% {
-      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
-    }
-    70% {
-      box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-    }
-  }
+  box-shadow: 0 0 6px color-mix(in srgb, var(--success) 60%, transparent);
 }
 
 .address {
   font-size: 14px;
-  font-weight: 600;
-  color: #1e40af;
-  position: relative;
-  z-index: 1;
+  font-weight: 700;
+  color: var(--primary-dark);
 
   @media (max-width: 768px) {
     font-size: 13px;
@@ -479,59 +305,38 @@
 }
 
 .logoutButton {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
   font-size: 14px;
-  font-weight: 500;
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  font-weight: 600;
+  border: 1px solid var(--border-medium);
   background: transparent;
-  color: #3b82f6;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  color: var(--primary-medium);
+  border-radius: var(--radius-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
   .logoutIcon {
-    transition: transform 0.3s ease;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      45deg,
-      transparent 30%,
-      rgba(59, 130, 246, 0.1) 50%,
-      transparent 70%
-    );
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
+    transition: transform 0.2s ease;
   }
 
   &:hover {
-    background: rgba(59, 130, 246, 0.08);
-    border-color: #3b82f6;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 10px rgba(59, 130, 246, 0.1);
+    background: color-mix(in srgb, var(--background-medium) 45%, transparent);
+    color: var(--primary-dark);
+    border-color: var(--primary-medium);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
 
     .logoutIcon {
       transform: translateX(2px);
-    }
-
-    &::before {
-      transform: translateX(100%);
     }
   }
 
   &:active {
     transform: translateY(0);
+    box-shadow: none;
   }
 
   @media (max-width: 768px) {

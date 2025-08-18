@@ -1,3 +1,5 @@
+/* Modernized Textarea aligned to Helios tokens */
+
 .container {
   display: flex;
   flex-direction: column;
@@ -6,58 +8,69 @@
 
 .label {
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #e2e8f0;
+  color: var(--text-primary);
 }
 
 .textarea {
-  background-color: #1e293b;
-  border: 1px solid #334155;
-  color: #f8fafc;
-  border-radius: 0.375rem;
-  padding: 0.625rem 0.75rem;
-  font-size: 0.875rem;
-  transition: all 0.2s ease;
+  background-color: var(--background-primary);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.9rem;
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
   width: 100%;
-  min-height: 100px;
+  min-height: 110px;
   resize: vertical;
   font-family: inherit;
+  box-shadow: var(--shadow-sm);
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+
+  &:hover {
+    border-color: var(--border-medium);
+  }
 
   &:focus {
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
-  }
-
-  &::placeholder {
-    color: #64748b;
+    border-color: var(--primary-medium);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--primary-medium) 20%, transparent);
   }
 
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
-    background-color: #1e293b;
+    background-color: color-mix(
+      in srgb,
+      var(--background-secondary) 40%,
+      var(--background-primary)
+    );
   }
 }
 
 .textareaError {
-  border-color: #ef4444;
+  border-color: var(--danger);
 
   &:focus {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 25%, transparent);
   }
 }
 
 .error {
-  font-size: 0.75rem;
-  color: #ef4444;
+  font-size: 0.8rem;
+  color: var(--danger);
   margin-top: 0.375rem;
 }
 
 .hint {
-  font-size: 0.75rem;
-  color: #64748b;
+  font-size: 0.8rem;
+  color: var(--text-muted);
   margin-top: 0.375rem;
 }
