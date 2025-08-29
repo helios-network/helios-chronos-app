@@ -3,7 +3,6 @@
 import { CronList } from "@/components/cron-list";
 import { CronReceipts } from "@/components/cron-receipts";
 import { Card } from "@/components/card";
-import { Heading } from "@/components/heading";
 import { useCronStatistics } from "@/hooks/useCrons";
 import s from "./page.module.scss";
 import Image from "next/image";
@@ -42,7 +41,7 @@ const HeroSection = () => (
           Automated task scheduler for Helios blockchain.
         </h1>
         <p className={s.heroSubtitle}>
-          Let's unlock reliable, secure smart‑contract automation
+          Let&apos;s unlock reliable, secure smart‑contract automation
           <br />
           Our audited scheduler executes your EVM tasks on time—transparent,
           immutable, and cost‑efficient.
