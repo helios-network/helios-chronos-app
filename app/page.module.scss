@@ -1,5 +1,6 @@
+// Container and base styles
 .container {
-  min-height: calc(100vh - 60px);
+  min-height: 100vh;
   background: var(--background-secondary);
 }
 
@@ -43,488 +44,531 @@
   }
 }
 
-.pageHeader {
-  padding: var(--spacing-2xl) var(--spacing-l);
-  text-align: center;
-  background: linear-gradient(
-    135deg,
-    var(--primary-dark) 0%,
-    var(--primary-medium) 60%,
-    var(--primary-light) 100%
-  );
-  color: white;
+// Hero Section
+.heroSection {
   position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        circle at 20% 50%,
-        color-mix(in srgb, var(--primary-light) 40%, transparent),
-        transparent 30%
-      ),
-      radial-gradient(
-        circle at 80% 30%,
-        color-mix(in srgb, var(--primary-medium) 35%, transparent),
-        transparent 30%
-      );
-    opacity: 0.7;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url("/img/helios-home-hyperion-modules.webp") no-repeat center
-      center;
-    background-size: cover;
-    opacity: 0.12;
-    mix-blend-mode: soft-light;
-    animation: pulse 8s ease-in-out infinite alternate;
-  }
-
-  @keyframes pulse {
-    0% {
-      opacity: 0.1;
-      transform: scale(1);
-    }
-    100% {
-      opacity: 0.16;
-      transform: scale(1.04);
-    }
-  }
-}
-
-.headerContent {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-  padding: 1.5rem 0;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 150px;
-    height: 4px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(96, 165, 250, 0.7),
-      transparent
-    );
-    border-radius: 2px;
-    filter: blur(1px);
-    opacity: 0.7;
-  }
-}
-
-.titleSection {
+  height: calc(100vh + 200px);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-m);
-  margin-bottom: var(--spacing-m);
-  flex-wrap: wrap;
+  overflow: hidden;
+  margin-top: -94px;
+  padding-top: 94px;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    height: calc(80vh + 200px);
+    min-height: 600px;
+    margin-top: -80px;
+    padding-top: 80px;
+  }
 }
 
-.title {
-  font-size: 4.5rem;
-  font-weight: 900;
-  background: linear-gradient(45deg, #ffffff, #c8e2ff, #97bbf5, #87a3ff);
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0;
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #e2ebff -14.21%, #0c33c4 120.42%);
+  z-index: 1;
+}
+
+.abstractImage {
+  object-fit: cover;
+  opacity: 1;
+  z-index: 2;
+  height: calc(100%);
+}
+
+.heroContent {
   position: relative;
-  text-shadow: 0 0 120px rgba(59, 130, 246, 0.5);
-  letter-spacing: -0.03em;
-  font-family: "Montserrat", system-ui, -apple-system, sans-serif;
-  animation: gradient-shift 8s ease infinite;
+  z-index: 3;
+  text-align: center;
+  max-width: 912px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 69px;
+  margin-top: -200px;
 
-  @keyframes gradient-shift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+  @media (max-width: 768px) {
+    gap: 40px;
+    max-width: 100%;
+    margin-top: -200px;
   }
+}
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    background: radial-gradient(
-      circle,
-      rgba(59, 130, 246, 0.2) 0%,
-      transparent 70%
-    );
-    z-index: -1;
-    opacity: 0.6;
-    animation: pulse-bg 4s ease-in-out infinite alternate;
+.badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 6.06px;
+  padding: 6.941px 13.015px 6.941px 6.941px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: #002dcb;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 17.128px;
+  font-weight: 500;
+  line-height: 19.96px;
+  letter-spacing: -0.26px;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 45, 203, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    padding: 6px 12px 6px 6px;
+    gap: 5px;
+    line-height: 18px;
   }
+}
 
-  @keyframes pulse-bg {
-    0% {
-      opacity: 0.4;
-      transform: scale(0.95);
-    }
-    100% {
-      opacity: 0.7;
-      transform: scale(1.05);
-    }
-  }
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 
-  &::after {
-    content: "Chronos";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      45deg,
-      transparent 25%,
-      rgba(255, 255, 255, 0.4) 50%,
-      transparent 75%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: blur(4px);
-    opacity: 0.7;
-    animation: shimmer 3s infinite;
-  }
+.heroTitle {
+  color: #fff;
+  text-align: center;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: -0.72px;
+  margin: 0;
+  max-width: 912px;
 
-  @keyframes shimmer {
-    0% {
-      background-position: -100% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
+  @media (max-width: 1024px) {
+    font-size: 56px;
   }
 
   @media (max-width: 768px) {
-    font-size: 3.2rem;
+    font-size: 40px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 32px;
   }
 }
 
-.heliosBadge {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-s);
-  background: rgba(30, 58, 138, 0.4);
-  backdrop-filter: blur(10px);
-  padding: var(--spacing-s) var(--spacing-m);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(96, 165, 250, 0.3);
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(59, 130, 246, 0.3),
-    inset 0 0 5px rgba(96, 165, 250, 0.2);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
+.heroSubtitle {
+  color: #fff;
+  text-align: center;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: -0.28px;
+  margin: 0;
+  max-width: 912px;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      45deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.15) 50%,
-      transparent 70%
-    );
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 0 20px rgba(59, 130, 246, 0.4),
-      inset 0 0 5px rgba(96, 165, 250, 0.3);
-
-    &::before {
-      transform: translateX(100%);
+  @media (max-width: 768px) {
+    font-size: 20px;
+    br {
+      display: none;
     }
   }
-}
 
-.actions {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto 2rem;
+  @media (max-width: 480px) {
+    font-size: 18px;
+  }
 }
 
 .scheduleButton {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(90deg, #1e40af, #3b82f6);
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 25px;
+  background: #002dcb;
+  border-radius: 15px;
+  color: #f2f6fe;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 20px rgba(59, 130, 246, 0.4);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      45deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.2) 50%,
-      transparent 70%
-    );
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.295px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
 
   &:hover {
+    background: #001ba3;
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 25px rgba(59, 130, 246, 0.5);
+  }
 
-    &::before {
-      transform: translateX(100%);
-    }
-
-    .scheduleIcon {
-      animation-play-state: paused;
-      transform: rotate(15deg);
-    }
+  @media (max-width: 768px) {
+    font-size: 16px;
+    padding: 12px 20px;
   }
 }
 
-.scheduleIcon {
-  transition: transform 0.3s ease;
-  animation: pulse-schedule-icon 2s ease-in-out infinite alternate;
-}
-
-@keyframes pulse-schedule-icon {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.1);
-  }
-}
-
-.heliosIcon {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.6));
-  animation: pulse-icon 2s ease-in-out infinite alternate;
-
-  @keyframes pulse-icon {
-    0% {
-      filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
-      transform: scale(1);
-    }
-    100% {
-      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.7));
-      transform: scale(1.1);
-    }
-  }
-}
-
-.subtitle {
-  font-size: 1.3rem;
-  opacity: 0.95;
-  line-height: 1.6;
-  max-width: 650px;
-  margin: 1.8rem auto 0;
-  padding: 1.2rem 1.8rem;
-  background: rgba(30, 58, 138, 0.3);
-  backdrop-filter: blur(8px);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(96, 165, 250, 0.2);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 20px rgba(59, 130, 246, 0.2),
-    inset 0 0 8px rgba(96, 165, 250, 0.1);
+// Automated Tasks Section
+.automatedTasksSection {
+  background: #fff;
+  padding: 137px 0;
   position: relative;
-  overflow: hidden;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.95);
-  letter-spacing: 0.01em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  margin-bottom: 1.5rem;
 
   &::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      45deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.1) 50%,
-      transparent 70%
-    );
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
-
-  &:hover::before {
-    transform: translateX(100%);
+    top: -153px;
+    left: -630px;
+    width: 2772px;
+    height: 1006px;
+    background: radial-gradient(
+        circle at 20%,
+        rgba(0, 45, 203, 0.2) 0%,
+        transparent 50%
+      ),
+      radial-gradient(circle at 80%, rgba(0, 45, 203, 0.2) 0%, transparent 50%);
+    filter: blur(100px);
+    z-index: 1;
   }
 
   @media (max-width: 768px) {
-    font-size: 1.125rem;
-    padding: 0.75rem 1rem;
-    margin-top: 1rem;
+    padding: 80px 0;
   }
 }
 
-.decorativeIcon {
-  position: absolute;
-  bottom: -40px;
-  right: 10%;
-  width: 150px;
-  height: 150px;
-  background: url("/img/helios-home-hyperion-modules.webp") no-repeat center
-    center;
-  background-size: cover;
-  opacity: 0.25;
-  border-radius: 50%;
-  filter: blur(1px);
-  z-index: 0;
-  animation: float 6s ease-in-out infinite;
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.4),
-    inset 0 0 20px rgba(96, 165, 250, 0.3);
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background: radial-gradient(
-      circle,
-      rgba(59, 130, 246, 0.3) 0%,
-      transparent 70%
-    );
-    border-radius: 50%;
-    filter: blur(10px);
-    animation: pulse-glow 4s ease-in-out infinite alternate;
-  }
-
-  @keyframes float {
-    0% {
-      transform: translateY(0) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-15px) rotate(5deg);
-    }
-    100% {
-      transform: translateY(0) rotate(0deg);
-    }
-  }
-
-  @keyframes pulse-glow {
-    0% {
-      opacity: 0.3;
-      transform: scale(0.95);
-    }
-    100% {
-      opacity: 0.6;
-      transform: scale(1.05);
-    }
-  }
+.automatedTasksContent {
+  position: relative;
+  z-index: 2;
+  max-width: 817px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 105px;
+  height: 71vh;
 
   @media (max-width: 768px) {
-    width: 100px;
-    height: 100px;
-    bottom: -30px;
+    gap: 60px;
   }
 }
 
-.decorativeIconLeft {
-  position: absolute;
-  top: 20px;
-  left: 8%;
-  width: 120px;
-  height: 120px;
-  background: url("/img/helios-home-hyperion-modules.webp") no-repeat center
-    center;
-  background-size: cover;
-  opacity: 0.2;
-  border-radius: 50%;
-  filter: blur(2px);
-  z-index: 0;
-  animation: float-reverse 7s ease-in-out infinite;
-  box-shadow: 0 0 25px rgba(59, 130, 246, 0.3),
-    inset 0 0 15px rgba(96, 165, 250, 0.2);
+.automatedTasksTitle {
+  color: #002dcb;
+  text-align: center;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 100%;
+  margin: 0;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    background: radial-gradient(
-      circle,
-      rgba(59, 130, 246, 0.2) 0%,
-      transparent 70%
-    );
-    border-radius: 50%;
-    filter: blur(8px);
-    animation: pulse-glow 5s ease-in-out infinite alternate-reverse;
+  @media (max-width: 768px) {
+    font-size: 36px;
   }
 
-  @keyframes float-reverse {
-    0% {
-      transform: translateY(0) rotate(0deg);
-    }
-    50% {
-      transform: translateY(12px) rotate(-4deg);
-    }
-    100% {
-      transform: translateY(0) rotate(0deg);
-    }
+  @media (max-width: 480px) {
+    font-size: 28px;
   }
+}
+
+.walletPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.walletIcon {
+  width: 100px;
+  height: 100px;
+  border-radius: 24px;
+  border: 1px solid #fff;
+  background: #002dcb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media (max-width: 768px) {
     width: 80px;
     height: 80px;
-    top: 10px;
-    left: 5%;
   }
 }
 
+.walletPromptText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+}
+
+.walletPromptTitle {
+  color: #002dcb;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 100%;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 24px;
+  }
+}
+
+.walletPromptSubtitle {
+  color: #5c6584;
+  text-align: center;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 120%;
+  margin: 0;
+  max-width: 600px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+  }
+}
+
+.connectWalletButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 385px;
+  height: 86px;
+  background: #002dcb;
+  border-radius: 15px;
+  color: #f2f6fe;
+  border: none;
+  cursor: pointer;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.295px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #001ba3;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 320px;
+    height: 70px;
+    font-size: 24px;
+    gap: 15px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 20px;
+    height: 60px;
+  }
+}
+
+.secureConnection {
+  color: #5c6584;
+  text-align: center;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+// Network Statistics Section
+.networkStatsSection {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 45, 203, 0.8) 30.07%,
+    rgba(226, 235, 255, 1) 111.58%
+  );
+  padding: 68px 0 67px;
+  position: relative;
+
+  @media (max-width: 768px) {
+    padding: 50px 0;
+  }
+}
+
+.networkStatsContent {
+  max-width: 1468px;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+}
+
+.networkStatsContainer {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 68px 40px;
+  margin: -200px 40px 0;
+  box-shadow: 0 0 60px rgba(0, 45, 203, 0.3), 0 20px 40px rgba(0, 45, 203, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+
+  @media (max-width: 768px) {
+    margin: 0 20px;
+    padding: 40px 20px;
+    border-radius: 24px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 0 16px;
+    padding: 32px 16px;
+    border-radius: 20px;
+  }
+}
+
+.networkStatsTitle {
+  color: #fff;
+  text-align: center;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 100%;
+  margin: 0 0 68px;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 28px;
+  }
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 1199px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.statsCard {
+  position: relative;
+  height: 260px;
+  border-radius: 38px;
+  background: linear-gradient(180deg, #f2f6fe 0%, #fafbff 100%);
+  box-shadow: 0 4px 150px -48px rgba(24, 31, 45, 0.13);
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    height: 240px;
+  }
+
+  @media (max-width: 480px) {
+    height: 220px;
+  }
+}
+
+.statsCardBackground {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(226, 235, 255, 1) 33%, #002dcb 133%);
+}
+
+.statsCardIcon {
+  object-fit: contain;
+  opacity: 0.8;
+  object-position: calc(100% + 36px) calc(0% - 25px);
+}
+
+.statsCardContent {
+  position: relative;
+  z-index: 2;
+  padding: 44px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  @media (max-width: 768px) {
+    padding: 32px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 24px;
+  }
+}
+
+.statsValue {
+  color: #000b3c;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 29px;
+  margin: 0 0 25px;
+
+  @media (max-width: 768px) {
+    font-size: 48px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 40px;
+  }
+}
+
+.statsTitle {
+  color: #000b3c;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 22px;
+  margin: 0 0 10px;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+}
+
+.statsDescription {
+  color: #fff;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+// Content section (for connected users)
 .content {
   padding: var(--spacing-2xl) 0;
   max-width: 1200px;
@@ -532,8 +576,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2xl);
-  padding-left: var(--spacing-l);
-  padding-right: var(--spacing-l);
 }
 
 .sectionCard {
@@ -572,207 +614,6 @@
 
 @media (max-width: 768px) {
   .content {
-    padding-left: var(--spacing-s);
-    padding-right: var(--spacing-s);
     gap: var(--spacing-l);
-  }
-}
-
-.statsContainer {
-  margin: 0;
-  padding: 0;
-}
-
-.statsHeading {
-  text-align: center;
-  margin-bottom: var(--spacing-2xl);
-  color: var(--primary-medium);
-  font-size: 2.25rem;
-  font-weight: 700;
-  position: relative;
-  display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(
-      90deg,
-      var(--primary-medium),
-      var(--primary-dark)
-    );
-    border-radius: 2px;
-  }
-}
-
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-l);
-  margin-bottom: var(--spacing-2xl);
-  position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: 0;
-    right: 0;
-    bottom: -10px;
-    background: url("/img/helios-home-hyperion-modules.webp") no-repeat center
-      center;
-    background-size: cover;
-    opacity: 0.03;
-    z-index: -1;
-    border-radius: var(--radius-lg);
-    filter: blur(1px);
-  }
-}
-
-.statsCard {
-  text-align: center;
-  padding: var(--spacing-xl);
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-  color: white;
-  border: none;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 15px rgba(59, 130, 246, 0.2);
-  position: relative;
-  overflow: hidden;
-  border-radius: 16px;
-  transition: all 0.3s ease;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      45deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.1) 50%,
-      transparent 70%
-    );
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("/img/helios-home-hyperion-modules.webp") no-repeat center
-      center;
-    background-size: cover;
-    opacity: 0.15;
-    mix-blend-mode: soft-light;
-    z-index: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover::before {
-    transform: translateX(100%);
-  }
-
-  &:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15),
-      0 10px 10px -5px rgba(0, 0, 0, 0.08), 0 0 20px rgba(59, 130, 246, 0.4);
-
-    &::after {
-      opacity: 0.25;
-    }
-
-    .statsValue {
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-    }
-  }
-}
-
-.statsValue {
-  font-size: 2.75rem;
-  font-weight: 800;
-  margin-bottom: var(--spacing-s);
-  position: relative;
-  z-index: 1;
-  background: linear-gradient(45deg, #ffffff, #e0e7ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.statsTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing-xs);
-  position: relative;
-  z-index: 1;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.statsDescription {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  position: relative;
-  z-index: 1;
-  max-width: 200px;
-  margin: 0 auto;
-  line-height: 1.5;
-}
-
-// Medium screens (tablets) - 2x2 grid
-@media (max-width: 1024px) and (min-width: 769px) {
-  .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-l);
-  }
-}
-
-// Small screens (mobile) - 1x4 grid
-@media (max-width: 768px) {
-  .pageHeader {
-    padding: var(--spacing-xl) var(--spacing-m);
-  }
-
-  .content {
-    padding: var(--spacing-xl) 0;
-  }
-
-  .statsGrid {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-m);
-  }
-
-  .statsCard {
-    padding: var(--spacing-l);
-  }
-
-  .statsValue {
-    font-size: 2rem;
-  }
-
-  .heliosBadge {
-    font-size: 0.75rem;
-    padding: var(--spacing-xs) var(--spacing-s);
-  }
-
-  .heliosIcon {
-    width: 16px;
-    height: 16px;
   }
 }

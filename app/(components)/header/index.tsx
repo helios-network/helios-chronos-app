@@ -9,95 +9,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const HeliosLogo = () => (
-  <Image
-    src="/img/logo1.png"
-    alt="Helios"
-    className={s.logo}
-    width={120}
-    height={40}
-  />
+const ChronosLogo = () => (
+  <div className={s.chronosLogo}>
+    <Image
+      src="/img/Chronos Logo.svg"
+      alt="Chronos"
+      width={241}
+      height={65}
+      className={s.chronosIcon}
+    />
+  </div>
 );
 
-const ChronosIcon = () => (
-  <svg viewBox="0 0 24 24" className={s.chronosIcon}>
-    <defs>
-      <linearGradient id="chronosGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#60a5fa" />
-        <stop offset="100%" stopColor="#1e40af" />
-      </linearGradient>
-      <linearGradient id="chronosGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#3b82f6" />
-        <stop offset="100%" stopColor="#1e40af" />
-      </linearGradient>
-      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="1" result="blur" />
-        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-      </filter>
-    </defs>
-    {/* Outer ring with tick marks */}
-    <circle
-      cx="12"
-      cy="12"
-      r="10"
-      fill="none"
-      stroke="url(#chronosGradient)"
-      strokeWidth="1"
-      opacity="0.6"
-    />
-
-    {/* Inner circle */}
-    <circle
-      cx="12"
-      cy="12"
-      r="8"
-      fill="none"
-      stroke="url(#chronosGradient)"
-      strokeWidth="1.5"
-    />
-
-    {/* Tick marks */}
-    <path d="M12 4v1.5" stroke="url(#chronosGradient)" strokeWidth="1" />
-    <path d="M12 18.5v1.5" stroke="url(#chronosGradient)" strokeWidth="1" />
-    <path d="M4 12h1.5" stroke="url(#chronosGradient)" strokeWidth="1" />
-    <path d="M18.5 12h1.5" stroke="url(#chronosGradient)" strokeWidth="1" />
-
-    {/* Hour hand */}
-    <path
-      d="M12 12L12 8"
-      stroke="url(#chronosGradient)"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-    />
-
-    {/* Minute hand */}
-    <path
-      d="M12 12L16 12"
-      stroke="url(#chronosGradient2)"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-    />
-
-    {/* Center dot */}
-    <circle cx="12" cy="12" r="1.2" fill="url(#chronosGradient)" />
-
-    {/* Small decorative elements */}
-    <path
-      d="M7 7L8 8"
-      stroke="url(#chronosGradient)"
-      strokeWidth="0.8"
-      opacity="0.8"
-    />
-    <path
-      d="M17 17L16 16"
-      stroke="url(#chronosGradient)"
-      strokeWidth="0.8"
-      opacity="0.8"
-    />
-  </svg>
-);
-
-const Wallet = () => {
+const ConnectWallet = () => {
   const { open: openLoginModal, close: closeLoginModal } = useAppKit();
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
@@ -127,20 +51,35 @@ const Wallet = () => {
 
   if (!address) {
     return (
-      <Button className={s.walletButton} onClick={handleConnect}>
+      <button className={s.connectWalletButton} onClick={handleConnect}>
         <svg
           className={s.walletIcon}
-          viewBox="0 0 24 24"
-          width="16"
-          height="16"
+          viewBox="0 0 23 23"
+          width="22"
+          height="22"
+          fill="none"
         >
           <path
-            d="M19 7h-1V6a3 3 0 00-3-3H5a3 3 0 00-3 3v12a3 3 0 003 3h14a3 3 0 003-3v-8a3 3 0 00-3-3zm-1 9a1 1 0 01-1 1h-1a1 1 0 01-1-1v-2a1 1 0 011-1h2a1 1 0 011 1v2z"
-            fill="currentColor"
+            d="M18 19.3964H4C3.46957 19.3964 2.96086 19.1857 2.58579 18.8106C2.21071 18.4356 2 17.9269 2 17.3964V8.39642C2 7.86599 2.21071 7.35728 2.58579 6.98221C2.96086 6.60714 3.46957 6.39642 4 6.39642H18C18.5304 6.39642 19.0391 6.60714 19.4142 6.98221C19.7893 7.35728 20 7.86599 20 8.39642V17.3964C20 17.9269 19.7893 18.4356 19.4142 18.8106C19.0391 19.1857 18.5304 19.3964 18 19.3964Z"
+            stroke="#E2EBFF"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M15.5 13.3964C15.3674 13.3964 15.2402 13.3437 15.1464 13.25C15.0527 13.1562 15 13.029 15 12.8964C15 12.7638 15.0527 12.6366 15.1464 12.5429C15.2402 12.4491 15.3674 12.3964 15.5 12.3964C15.6326 12.3964 15.7598 12.4491 15.8536 12.5429C15.9473 12.6366 16 12.7638 16 12.8964C16 13.029 15.9473 13.1562 15.8536 13.25C15.7598 13.3437 15.6326 13.3964 15.5 13.3964Z"
+            fill="#E2EBFF"
+            stroke="#E2EBFF"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M17 6.39644V4.99944C16.9999 4.69295 16.9294 4.39057 16.7939 4.11566C16.6583 3.84075 16.4614 3.60067 16.2184 3.41396C15.9753 3.22724 15.6926 3.09888 15.3921 3.0388C15.0915 2.97872 14.7812 2.98852 14.485 3.06744L3.485 6.00044C3.05905 6.11395 2.68254 6.365 2.41399 6.71457C2.14544 7.06414 1.9999 7.49263 2 7.93344V8.39644"
+            stroke="#E2EBFF"
+            strokeWidth="1.5"
           />
         </svg>
         <span>Connect Wallet</span>
-      </Button>
+      </button>
     );
   }
 
@@ -179,106 +118,54 @@ export const Header = () => {
     <header className={s.header}>
       <div className={s.headerBackground}></div>
       <div className={s.headerContent}>
-        <div className={s.logoSection}>
-          <a
-            href="https://helioschain.network"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={s.heliosLogoLink}
-          >
-            <HeliosLogo />
-          </a>
-          <div className={s.divider}></div>
-          <Link
-            href="/"
-            className={s.chronosSection}
-            onClick={() => {
-              // Mark navigation for progress bar
-              sessionStorage.setItem("isNavigating", "true");
-              // Mark that we're navigating back to home if we're not already there
-              if (pathname !== "/") {
-                sessionStorage.setItem("navigatedFromHome", "true");
-              }
-            }}
-          >
-            <ChronosIcon />
-            <span className={s.chronosText}>Chronos</span>
-          </Link>
-        </div>
-        <div className={s.right}>
-          <div className={s.navLinks}>
+        <Link
+          href="/"
+          className={s.logoSection}
+          onClick={() => {
+            sessionStorage.setItem("isNavigating", "true");
+            if (pathname !== "/") {
+              sessionStorage.setItem("navigatedFromHome", "true");
+            }
+          }}
+        >
+          <ChronosLogo />
+        </Link>
+
+        <div className={s.navigation}>
+          <div className={s.navContainer}>
             <Link
               href="/"
-              className={`${s.navLink} ${
-                pathname === "/" ? s.navLinkActive : ""
+              className={`${s.navItem} ${
+                pathname === "/" ? s.navItemActive : ""
               }`}
               onClick={() => {
-                // Mark navigation for progress bar
                 sessionStorage.setItem("isNavigating", "true");
-                // Mark that we're navigating back to home if we're not already there
                 if (pathname !== "/") {
                   sessionStorage.setItem("navigatedFromHome", "true");
                 }
               }}
             >
-              <svg
-                className={s.navIcon}
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-              >
-                <path
-                  d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"
-                  fill="currentColor"
-                />
-              </svg>
               Home
             </Link>
             <Link
               href="/schedule"
-              className={`${s.navLink} ${
-                pathname === "/schedule" ? s.navLinkActive : ""
+              className={`${s.navItem} ${
+                pathname === "/schedule" ? s.navItemActive : ""
               }`}
               onClick={() => {
-                // Mark navigation for progress bar
                 sessionStorage.setItem("isNavigating", "true");
-                // Mark that we're navigating away from home if we're currently on home
                 if (pathname === "/") {
                   sessionStorage.setItem("navigatedFromHome", "true");
                 }
               }}
             >
-              <svg
-                className={s.navIcon}
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-              >
-                <path
-                  d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"
-                  fill="currentColor"
-                />
-              </svg>
-              Schedule
+              Scheduler
             </Link>
-            <div className={`${s.navLink} ${s.navLinkDisabled}`}>
-              <svg
-                className={s.navIcon}
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-              >
-                <path
-                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 16H7v-2h10v2zm0-4H7v-2h10v2zm0-4H7V9h10v2zm0-4H7V5h10v2z"
-                  fill="currentColor"
-                />
-              </svg>
-              Docs
-              <span className={s.comingSoon}>Soon</span>
-            </div>
+            <div className={`${s.navItem} ${s.navItemDisabled}`}>Docs</div>
           </div>
-          <Wallet />
         </div>
+
+        <ConnectWallet />
       </div>
     </header>
   );

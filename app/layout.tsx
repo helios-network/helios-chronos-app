@@ -173,7 +173,7 @@ export default async function RootLayout({
         <ContextProvider cookies={cookies}>
           <Header />
           <GlobalProgressBar />
-          <main style={{ padding: "24px" }}>{children}</main>
+          <main>{children}</main>
           <Toaster
             position="bottom-right"
             richColors

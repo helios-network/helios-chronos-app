@@ -5,13 +5,22 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**"
-      }
-    ]
+        hostname: "**",
+      },
+    ],
   },
   experimental: {
-    optimizePackageImports: ["@iconify/react"]
-  }
-}
+    optimizePackageImports: ["@iconify/react"],
+  },
+  webpack: (config, { dev }) => {
+    // Disable filesystem cache in development to avoid corrupted cache issues
+    if (dev) {
+      config.cache = {
+        type: "memory",
+      } as any;
+    }
+    return config;
+  },
+};
 
 export default nextConfig

@@ -1,27 +1,28 @@
-/* Modernized Helios Header Styles (keeps structure/classes) */
-
+// Header based on Figma design
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  height: 64px;
+  height: 94px;
   width: 100%;
   overflow: hidden;
 
   @media (max-width: 768px) {
-    height: 60px;
+    height: 80px;
+    padding: 0 16px;
   }
 }
 
 .headerBackground {
   position: absolute;
   inset: 0;
-  /* Subtle translucent surface with blur */
-  background: color-mix(in srgb, var(--background-primary) 92%, transparent);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) -14.21%,
+    transparent 120.42%
+  );
   z-index: -1;
 }
 
@@ -29,231 +30,190 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--spacing-l);
+  padding: 0 27px;
   height: 100%;
-  max-width: 1280px;
+  max-width: 1920px;
   margin: 0 auto;
   position: relative;
 
   @media (max-width: 768px) {
-    padding: 0 var(--spacing-m);
+    padding: 0 16px;
   }
 }
 
+// Logo Section
 .logoSection {
   display: flex;
   align-items: center;
-  gap: var(--spacing-m);
-}
-
-.heliosLogoLink {
-  display: flex;
-  align-items: center;
-  transition: opacity 0.25s ease;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
 
   &:hover {
-    opacity: 0.85;
+    opacity: 0.9;
   }
 }
 
-.logo {
-  height: 28px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08));
-
-  @media (max-width: 768px) {
-    height: 24px;
-  }
-}
-
-.divider {
-  width: 1px;
-  height: 24px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    var(--border-medium),
-    transparent
-  );
-  margin: 0 var(--spacing-s);
-
-  @media (max-width: 768px) {
-    height: 22px;
-  }
-}
-
-.chronosSection {
+.chronosLogo {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 10px;
-  border-radius: var(--radius-md);
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  text-decoration: none;
-  cursor: pointer;
-
-  &:hover {
-    background: color-mix(in srgb, var(--border-light) 30%, transparent);
-    transform: translateY(-1px);
-  }
 }
 
 .chronosIcon {
-  width: 22px;
-  height: 22px;
-  transition: transform 0.35s ease;
-  color: var(--primary-medium);
+  width: 241px;
+  height: 65px;
+  flex-shrink: 0;
 
   @media (max-width: 768px) {
-    width: 20px;
-    height: 20px;
+    width: 180px;
+    height: 48px;
   }
-}
-
-.chronosSection:hover .chronosIcon {
-  transform: rotate(8deg) scale(1.03);
 }
 
 .chronosText {
-  font-size: 20px;
-  font-weight: 800;
-  font-family: "Montserrat", system-ui, -apple-system, sans-serif;
-  background: linear-gradient(
-    90deg,
-    var(--primary-dark),
-    var(--primary-medium)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.chronosTitle {
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #002dcb;
+  line-height: 1;
   letter-spacing: -0.02em;
 
   @media (max-width: 768px) {
-    font-size: 18px;
+    font-size: 24px;
   }
 }
 
-.right {
+.byHelios {
   display: flex;
   align-items: center;
-  gap: 20px;
-  margin-left: auto;
+  gap: 2px;
+  margin-top: 4px;
 }
 
-.navLinks {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.byText {
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: #002dcb;
+}
+
+.heliosText {
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: #002dcb;
+}
+
+// Navigation
+.navigation {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 
   @media (max-width: 768px) {
     display: none;
   }
 }
 
-.navLink {
-  display: inline-flex;
+.navContainer {
+  display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 999px; /* pill */
-  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  gap: 6px;
+  background: rgba(0, 45, 203, 0.05);
+  backdrop-filter: blur(4px);
+  border-radius: 38px;
+  padding: 5px;
   position: relative;
-  border: 1px solid transparent;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 17px;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000b3c;
+  text-decoration: none;
+  border-radius: 38px;
+  transition: all 0.2s ease;
+  position: relative;
+  white-space: nowrap;
+  letter-spacing: -0.295px;
 
   &:hover {
-    color: var(--primary-dark);
-    background: color-mix(in srgb, var(--background-medium) 45%, transparent);
-    border-color: var(--border-light);
-    transform: translateY(-1px);
+    background: rgba(0, 45, 203, 0.08);
   }
 }
 
-.navLinkActive {
-  color: var(--primary-dark);
-  background: color-mix(in srgb, var(--background-medium) 55%, transparent);
-  border-color: var(--border-medium);
-
-  .navIcon {
-    color: var(--primary-dark);
-    transform: none;
-  }
+.navItemActive {
+  background: rgba(0, 45, 203, 0.05);
+  color: #002dcb;
 }
 
-.navIcon {
-  color: var(--primary-medium);
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.navLinkDisabled {
+.navItemDisabled {
   opacity: 0.6;
   cursor: not-allowed;
 
   &:hover {
     background: none !important;
-    color: var(--text-secondary) !important;
-    border-color: transparent !important;
-    transform: none;
   }
 }
 
-.comingSoon {
-  position: absolute;
-  top: -6px;
-  right: -10px;
-  background: var(--primary-medium);
-  color: white;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: var(--shadow-sm);
-}
-
-/* Wallet */
-.walletButton {
+// Connect Wallet Button
+.connectWalletButton {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: linear-gradient(
-    135deg,
-    var(--primary-dark) 0%,
-    var(--primary-medium) 100%
-  );
-  color: white;
+  gap: 9px;
+  background: #002dcb;
+  color: #f2f6fe;
   border: none;
-  padding: 8px 14px;
-  border-radius: var(--radius-md);
-  font-weight: 600;
+  padding: 13px 28px;
+  border-radius: 15px;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 16.23px;
+  letter-spacing: -0.295px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-
-  .walletIcon {
-    transition: transform 0.25s ease;
-  }
+  transition: all 0.2s ease;
+  height: 48px;
 
   &:hover {
+    background: #001ba3;
     transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-
-    .walletIcon {
-      transform: rotate(8deg);
-    }
   }
 
   &:active {
     transform: translateY(0);
-    box-shadow: var(--shadow-sm);
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 20px;
+    font-size: 16px;
+    height: 40px;
   }
 }
 
+.walletIcon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// Connected wallet styles
 .walletConnected {
   display: flex;
   align-items: center;
@@ -268,40 +228,30 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: color-mix(in srgb, var(--background-medium) 55%, transparent);
+  background: rgba(242, 246, 254, 0.9);
   padding: 6px 12px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-light);
-  transition: transform 0.2s ease, box-shadow 0.2s ease,
-    background-color 0.2s ease;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 45, 203, 0.2);
+  transition: all 0.2s ease;
 
   &:hover {
+    background: rgba(242, 246, 254, 1);
     transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
-
-  @media (max-width: 768px) {
-    padding: 6px 10px;
   }
 }
 
 .addressDot {
   width: 8px;
   height: 8px;
-  background: var(--success);
+  background: #10b981;
   border-radius: 50%;
-  box-shadow: 0 0 6px color-mix(in srgb, var(--success) 60%, transparent);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
 }
 
 .address {
   font-size: 14px;
-  font-weight: 700;
-  color: var(--primary-dark);
-
-  @media (max-width: 768px) {
-    font-size: 13px;
-  }
+  font-weight: 600;
+  color: #002dcb;
 }
 
 .logoutButton {
@@ -311,36 +261,27 @@
   padding: 6px 12px;
   font-size: 14px;
   font-weight: 600;
-  border: 1px solid var(--border-medium);
-  background: transparent;
-  color: var(--primary-medium);
-  border-radius: var(--radius-md);
-  transition: transform 0.2s ease, box-shadow 0.2s ease,
-    background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-
-  .logoutIcon {
-    transition: transform 0.2s ease;
-  }
+  border: 1px solid rgba(0, 45, 203, 0.3);
+  background: rgba(242, 246, 254, 0.9);
+  color: #002dcb;
+  border-radius: 12px;
+  transition: all 0.2s ease;
 
   &:hover {
-    background: color-mix(in srgb, var(--background-medium) 45%, transparent);
-    color: var(--primary-dark);
-    border-color: var(--primary-medium);
+    background: rgba(242, 246, 254, 1);
+    border-color: #002dcb;
     transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
-
-    .logoutIcon {
-      transform: translateX(2px);
-    }
   }
 
   &:active {
     transform: translateY(0);
-    box-shadow: none;
   }
+}
 
-  @media (max-width: 768px) {
-    padding: 6px 10px;
-    font-size: 13px;
-  }
+.logoutIcon {
+  transition: transform 0.2s ease;
+}
+
+.logoutButton:hover .logoutIcon {
+  transform: translateX(2px);
 }
