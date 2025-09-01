@@ -226,13 +226,18 @@
     width: 2772px;
     height: 1006px;
     background: radial-gradient(
-        circle at 20%,
-        rgba(0, 45, 203, 0.2) 0%,
-        transparent 50%
+        circle 500px at 10% 60%,
+        rgba(0, 45, 203, 0.7) 100%,
+        transparent 70%
       ),
-      radial-gradient(circle at 80%, rgba(0, 45, 203, 0.2) 0%, transparent 50%);
-    filter: blur(100px);
+      radial-gradient(
+        circle 500px at 105% 60%,
+        rgba(0, 45, 203, 0.7) 100%,
+        transparent 70%
+      );
+    filter: blur(236px);
     z-index: 1;
+    overflow: hidden;
   }
 
   @media (max-width: 768px) {
@@ -327,11 +332,11 @@
   color: #5c6584;
   text-align: center;
   font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 400;
-  line-height: 120%;
+  line-height: 38.4px;
   margin: 0;
-  max-width: 600px;
+  max-width: 764px;
 
   @media (max-width: 768px) {
     font-size: 20px;
@@ -350,14 +355,14 @@
   width: 385px;
   height: 86px;
   background: #002dcb;
-  border-radius: 15px;
+  border-radius: 14.75px;
   color: #f2f6fe;
   border: none;
   cursor: pointer;
   font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 30px;
   font-weight: 700;
-  line-height: 16px;
+  line-height: 16.23px;
   letter-spacing: -0.295px;
   transition: all 0.2s ease;
 

@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;700&display=swap");
+
+.footer {
+  background: linear-gradient(180deg, rgba(226, 235, 255, 1) 0%, #fff 92.26%);
+  padding: 81px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 81px;
+
+  @media (max-width: 767px) {
+    padding: 40px 24px;
+    gap: 40px;
+  }
+}
+
+.linksGrid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32.6px;
+  flex: 1 0 0;
+  align-self: stretch;
+  width: 100%;
+
+  @media (max-width: 1023px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.linkColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 21.44px;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.columnHeading {
+  font-family: "Satoshi Variable", -apple-system, "Roboto", "Helvetica",
+    sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20.65px;
+  color: #000b3c;
+  margin: 0;
+  align-self: stretch;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13.2px;
+  align-self: stretch;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linkItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  margin: 0;
+}
+
+.link {
+  display: flex;
+  padding: 0.5px 0;
+  align-items: flex-start;
+  font-family: "Satoshi Variable", -apple-system, "Roboto", "Helvetica",
+    sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 17.21px;
+  color: #8690a9;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #002dcb;
+  }
+
+  &:focus {
+    outline: 2px solid #002dcb;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.bottomSection {
+  display: flex;
+  width: 100%;
+  max-width: 696.296px;
+  padding-bottom: 0.39px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 26.02px;
+
+  @media (max-width: 767px) {
+    max-width: 100%;
+  }
+}
+
+.logoAndSocial {
+  display: flex;
+  min-height: 42.47px;
+  align-items: flex-start;
+  gap: 40.73px;
+  width: 100%;
+  height: 42px;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    min-height: auto;
+    height: auto;
+  }
+}
+
+.logo {
+  width: 150px;
+  height: 40px;
+  object-fit: contain;
+
+  @media (max-width: 767px) {
+    width: 100px;
+    height: auto;
+  }
+}
+
+.socialIcons {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+.socialLink {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #002dcb;
+  transition: all 0.2s ease;
+  padding: 4px;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: rgba(0, 45, 203, 0.1);
+    transform: translateY(-1px);
+  }
+
+  &:focus {
+    outline: 2px solid #002dcb;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  svg {
+    width: 26.02px;
+    height: 26.02px;
+  }
+}
+
+.disclaimer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 26px;
+}
+
+.disclaimerText {
+  font-family: "Satoshi Variable", -apple-system, "Roboto", "Helvetica",
+    sans-serif;
+  font-size: 17.4px;
+  font-weight: 400;
+  line-height: 26px;
+  color: #000b3c;
+  margin: 0;
+
+  @media (max-width: 767px) {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
+
+.copyright {
+  display: flex;
+  width: 100%;
+  padding-bottom: 0.95px;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 32px;
+  border-top: 1px solid rgba(134, 144, 169, 0.2);
+  padding-top: 24px;
+}
+
+.copyrightText {
+  font-family: "Satoshi Variable", -apple-system, "Roboto", "Helvetica",
+    sans-serif;
+  font-size: 14.8px;
+  font-weight: 400;
+  line-height: 16.96px;
+  color: #8690a9;
+  margin: 0;
+
+  @media (max-width: 767px) {
+    font-size: 13px;
+    line-height: 15px;
+  }
+}

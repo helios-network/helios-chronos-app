@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { Metadata } from "next";
 import { Header } from "./(components)/header";
 import { GlobalProgressBar } from "@/components/global-progress-bar";
+import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
@@ -171,15 +172,18 @@ export default async function RootLayout({
         </div>
 
         <ContextProvider cookies={cookies}>
-          <Header />
-          <GlobalProgressBar />
-          <main>{children}</main>
-          <Toaster
-            position="bottom-right"
-            richColors
-            closeButton
-            theme="dark"
-          />
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <Header />
+            <GlobalProgressBar />
+            <main style={{ flex: 1 }}>{children}</main>
+            <Footer />
+            <Toaster
+              position="bottom-right"
+              richColors
+              closeButton
+              theme="dark"
+            />
+          </div>
         </ContextProvider>
       </body>
     </html>
