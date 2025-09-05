@@ -1,9 +1,8 @@
 "use client";
 
 import { CronScheduler } from "@/components/cron-scheduler";
-import { Heading } from "@/components/heading";
 import { useAccount } from "wagmi";
-import { Card } from "@/components/card";
+import { useAppKit } from "@reown/appkit/react";
 import Image from "next/image";
 import s from "./page.module.scss";
 
@@ -19,123 +18,132 @@ const HeliosIcon = () => (
 
 export default function SchedulePage() {
   const { isConnected } = useAccount();
+  const { open: openConnectModal } = useAppKit();
 
   return (
     <div className={s.container}>
-      <header className={s.pageHeader}>
-        <div className={s.headerContent}>
-          <div className={s.titleSection}>
-            <Heading level={1} size="large" className={s.title}>
-              Schedule Automation Tasks
-            </Heading>
-            <div className={s.heliosBadge}>
-              <HeliosIcon />
-              <span>Powered by Helios</span>
-            </div>
+      {/* Hero Section */}
+      <section className={s.heroSection}>
+        <div className={s.heroBackground}>
+          <Image
+            src="/img/abst51.png"
+            alt="Abstract background"
+            fill
+            className={s.abstractImage}
+            priority
+          />
+        </div>
+        <div className={s.heroContent}>
+          <div className={s.badge}>
+            <HeliosIcon />
+            <span>Powered by Helios</span>
           </div>
-          <p className={s.subtitle}>
-            Create smart automated tasks that run 24/7 on the Helios blockchain.
-            No servers, no maintenance - just set it and forget it! ✨
-          </p>
-
-          <div className={s.features}>
-            <div className={s.feature}>
-              <div className={s.featureIcon}>
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                >
-                  <path d="M13 3L4 14h7v7l9-11h-7V3z" />
-                </svg>
+          <div className={s.heroText}>
+            <h1 className={s.heroTitle}>Schedule Automation Tasks</h1>
+            <p className={s.heroSubtitle}>
+              Create smart automated tasks that run 24/7 on the Helios
+              blockchain.
+              <br />
+              No servers, no maintenance - just set it and forget it!
+            </p>
+          </div>
+          <div className={s.featuresPanel}>
+            <div className={s.features}>
+              <div className={s.feature}>
+                <div className={s.featureIcon}>
+                  <Image
+                    src="/img/icon1.png"
+                    alt="Instant Setup"
+                    width={60}
+                    height={60}
+                  />
+                </div>
+                <span>Instant Setup</span>
               </div>
-              <span>Instant Setup</span>
-            </div>
-            <div className={s.feature}>
-              <div className={s.featureIcon}>
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                >
-                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
-                </svg>
+              <div className={s.feature}>
+                <div className={s.featureIcon}>
+                  <Image
+                    src="/img/icon3.png"
+                    alt="Secure & Reliable"
+                    width={60}
+                    height={60}
+                  />
+                </div>
+                <span>Secure & Reliable</span>
               </div>
-              <span>Secure & Reliable</span>
-            </div>
-            <div className={s.feature}>
-              <div className={s.featureIcon}>
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
+              <div className={s.feature}>
+                <div className={s.featureIcon}>
+                  <Image
+                    src="/img/icon2.png"
+                    alt="Cost Effective"
+                    width={60}
+                    height={60}
+                  />
+                </div>
+                <span>Cost Effective</span>
               </div>
-              <span>Cost Effective</span>
-            </div>
-            <div className={s.feature}>
-              <div className={s.featureIcon}>
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                >
-                  <path d="M12 6v6l4 2-4-2V6zm0-4C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-                </svg>
+              <div className={s.feature}>
+                <div className={s.featureIcon}>
+                  <Image
+                    src="/img/icon4.png"
+                    alt="24/7 Automation"
+                    width={60}
+                    height={60}
+                  />
+                </div>
+                <span>24/7 Automation</span>
               </div>
-              <span>24/7 Automation</span>
             </div>
           </div>
         </div>
-      </header>
+      </section>
 
-      <div className={s.content}>
-        {isConnected ? (
-          <CronScheduler />
-        ) : (
-          <Card className={s.connectPrompt}>
-            <div className={s.connectContent}>
+      {/* Main Content Section */}
+      <section className={isConnected ? s.mainSectionConnected : s.mainSection}>
+        <div className={s.mainContent}>
+          {isConnected ? (
+            <CronScheduler />
+          ) : (
+            <div className={s.walletPrompt}>
+              <h2 className={s.walletPromptTitle}>Connect Your Wallet</h2>
               <div className={s.walletIcon}>
-                <svg viewBox="0 0 24 24" width="48" height="48">
-                  <path
-                    d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
-                    fill="currentColor"
-                  />
+                <svg
+                  viewBox="0 0 24 24"
+                  width="48"
+                  height="48"
+                  fill="currentColor"
+                >
+                  <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
                 </svg>
               </div>
-              <h2 className={s.connectTitle}>Connect Your Wallet</h2>
-              <p className={s.connectMessage}>
-                Connect your wallet to start creating automated tasks. Your
-                tasks will be linked to your wallet address for security and
-                will execute automatically on the Helios blockchain.
-              </p>
-              <div className={s.connectInstructions}>
-                <div className={s.instructionStep}>
-                  <div className={s.stepNumber}>1</div>
-                  <span>
-                    Click the &quot;Connect Wallet&quot; button in the top
-                    navigation
-                  </span>
-                </div>
-                <div className={s.instructionStep}>
-                  <div className={s.stepNumber}>2</div>
-                  <span>Select your preferred wallet provider</span>
-                </div>
-                <div className={s.instructionStep}>
-                  <div className={s.stepNumber}>3</div>
-                  <span>Authorize the connection to start scheduling</span>
-                </div>
+              <div className={s.walletPromptText}>
+                <p className={s.walletPromptSubtitle1}>
+                  Wallet Connection required
+                </p>
+                <p className={s.walletPromptSubtitle2}>
+                  Connect securely to create and manage your schedule on-chain
+                  tasks.
+                </p>
               </div>
+              <button
+                className={s.connectWalletButton}
+                onClick={() => openConnectModal()}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                >
+                  <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+                </svg>
+                Connect Wallet
+              </button>
+              <p className={s.secureConnection}>Secure connection ~ 30 sec</p>
             </div>
-          </Card>
-        )}
-      </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

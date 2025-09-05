@@ -1,7 +1,7 @@
 // Global progress bar for all page navigations
 .progressBarContainer {
   position: fixed;
-  top: 60px; // Below the header (header height is 60px)
+  top: 95px; // Below the header (header height is 60px)
   left: 0;
   right: 0;
   height: 3px;
@@ -19,7 +19,6 @@
     var(--primary-light)
   );
   background-size: 200% 100%;
-  animation: progressShine 1s ease-in-out infinite;
   transition: width 0.3s ease;
   box-shadow: 0 0 10px
     color-mix(in srgb, var(--primary-medium) 50%, transparent);

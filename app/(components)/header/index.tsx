@@ -145,7 +145,7 @@ export const Header = () => {
                 }
               }}
             >
-              Home
+              <b>Home</b>
             </Link>
             <Link
               href="/schedule"
@@ -159,7 +159,7 @@ export const Header = () => {
                 }
               }}
             >
-              Scheduler
+              <b>Scheduler</b>
             </Link>
             <div className={`${s.navItem} ${s.navItemDisabled}`}>Docs</div>
           </div>

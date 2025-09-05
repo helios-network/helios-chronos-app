@@ -132,7 +132,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 50px;
 }
 
 .heroTitle {
@@ -143,7 +143,7 @@
   font-weight: 700;
   line-height: 100%;
   letter-spacing: -0.72px;
-  margin: 0;
+  margin-bottom: 0;
   max-width: 912px;
 
   @media (max-width: 1024px) {
@@ -167,7 +167,7 @@
   font-weight: 500;
   line-height: 120%;
   letter-spacing: -0.28px;
-  margin: 0;
+  margin-top: 50px;
   max-width: 912px;
 
   @media (max-width: 768px) {
@@ -221,23 +221,24 @@
   &::before {
     content: "";
     position: absolute;
-    top: -153px;
-    left: -630px;
-    width: 2772px;
-    height: 1006px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: radial-gradient(
-        circle 500px at 10% 60%,
-        rgba(0, 45, 203, 0.7) 100%,
+        circle 500px at -150px 50%,
+        rgba(0, 45, 203, 0.15) 100%,
         transparent 70%
       ),
       radial-gradient(
-        circle 500px at 105% 60%,
-        rgba(0, 45, 203, 0.7) 100%,
+        circle 500px at calc(100% + 150px) 50%,
+        rgba(0, 45, 203, 0.15) 90%,
         transparent 70%
       );
-    filter: blur(236px);
-    z-index: 1;
+    filter: blur(80px);
+    z-index: 0;
     overflow: hidden;
+    pointer-events: none;
   }
 
   @media (max-width: 768px) {
@@ -247,7 +248,7 @@
 
 .automatedTasksContent {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   max-width: 817px;
   margin: 0 auto;
   padding: 0;
