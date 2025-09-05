@@ -139,7 +139,7 @@ export const CronList = () => {
     return (
       <div className={s.container}>
         <div className={s.sectionHeader}>
-          <Heading level={2} size="medium" className={s.sectionHeading}>
+          <Heading level={2} size="large" className={s.sectionHeading}>
             Your Automated Tasks
           </Heading>
           <p className={s.sectionDescription}>
@@ -188,7 +188,7 @@ export const CronList = () => {
     return (
       <div className={s.container}>
         <div className={s.sectionHeader}>
-          <Heading level={2} size="medium" className={s.sectionHeading}>
+          <Heading level={2} size="large" className={s.sectionHeading}>
             Your Automated Tasks
           </Heading>
           <p className={s.sectionDescription}>
@@ -207,7 +207,7 @@ export const CronList = () => {
     return (
       <div className={s.container}>
         <div className={s.sectionHeader}>
-          <Heading level={2} size="medium" className={s.sectionHeading}>
+          <Heading level={2} size="large" className={s.sectionHeading}>
             Your Automated Tasks
           </Heading>
           <p className={s.sectionDescription}>
@@ -246,7 +246,7 @@ export const CronList = () => {
   return (
     <div className={s.container}>
       <div className={s.sectionHeader}>
-        <Heading level={2} size="medium" className={s.sectionHeading}>
+        <Heading level={2} size="large" className={s.sectionHeading}>
           Your Automated Tasks
         </Heading>
         <p className={s.sectionDescription}>

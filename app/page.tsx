@@ -305,13 +305,15 @@ export default function HomePage() {
 
       {/* Show existing content only when wallet is connected */}
       {address && (
-        <div className={s.content}>
-          <Card className={s.sectionCard}>
-            <CronList />
-          </Card>
-          <Card className={s.sectionCard}>
-            <CronReceipts />
-          </Card>
+        <div className={s.contentWrapper}>
+          <div className={s.content}>
+            <Card className={s.sectionCard}>
+              <CronList />
+            </Card>
+            <Card className={s.sectionCard}>
+              <CronReceipts />
+            </Card>
+          </div>
         </div>
       )}
     </div>

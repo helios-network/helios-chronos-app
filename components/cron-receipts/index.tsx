@@ -249,7 +249,7 @@ export const CronReceipts = () => {
   return (
     <div className={s.container}>
       <div className={s.header}>
-        <Heading level={2} size="medium" className={s.heading}>
+        <Heading level={2} size="large" className={s.heading}>
           Latest Cron Transactions
         </Heading>
         <p className={s.description}>
