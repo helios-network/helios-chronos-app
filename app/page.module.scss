@@ -486,90 +486,177 @@
 
 .statsCard {
   position: relative;
-  height: 260px;
-  border-radius: 38px;
-  background: linear-gradient(180deg, #f2f6fe 0%, #fafbff 100%);
-  box-shadow: 0 4px 150px -48px rgba(24, 31, 45, 0.13);
+  height: 280px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 45, 203, 0.15),
+    0 2px 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent
+    );
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 16px 48px rgba(0, 45, 203, 0.25),
+      0 4px 16px rgba(255, 255, 255, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.18);
+
+    .statsCardBackground {
+      opacity: 1;
+    }
+
+    .statsCardIcon {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+
+    .statsValue {
+      text-shadow: 0 2px 12px rgba(0, 45, 203, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .statsTitle {
+      color: #ffffff;
+      text-shadow: 0 1px 6px rgba(0, 45, 203, 0.3);
+    }
+
+    .statsDescription {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
 
   @media (max-width: 768px) {
-    height: 240px;
+    height: 260px;
+    border-radius: 28px;
+
+    &:hover {
+      transform: translateY(-6px) scale(1.01);
+    }
   }
 
   @media (max-width: 480px) {
-    height: 220px;
+    height: 240px;
+    border-radius: 24px;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
   }
 }
 
 .statsCardBackground {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(226, 235, 255, 1) 33%, #002dcb 133%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(226, 235, 255, 0.2) 50%,
+    rgba(0, 45, 203, 0.3) 100%
+  );
+  opacity: 0.8;
+  transition: opacity 0.4s ease;
 }
 
 .statsCardIcon {
   object-fit: contain;
-  opacity: 0.8;
+  opacity: 0.6;
   object-position: calc(100% + 36px) calc(0% - 25px);
+  filter: drop-shadow(0 4px 8px rgba(0, 45, 203, 0.2));
+  transition: all 0.4s ease;
 }
 
 .statsCardContent {
   position: relative;
   z-index: 2;
-  padding: 44px;
+  padding: 48px;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  transition: all 0.4s ease;
 
   @media (max-width: 768px) {
-    padding: 32px;
+    padding: 36px;
   }
 
   @media (max-width: 480px) {
-    padding: 24px;
+    padding: 28px;
   }
 }
 
 .statsValue {
-  color: #000b3c;
+  color: #ffffff;
   font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 64px;
+  font-size: 68px;
   font-weight: 700;
-  line-height: 29px;
-  margin: 0 0 25px;
+  line-height: 1.1;
+  margin: 0 0 16px;
+  text-shadow: 0 2px 8px rgba(0, 45, 203, 0.3);
+  transition: all 0.4s ease;
 
   @media (max-width: 768px) {
-    font-size: 48px;
+    font-size: 52px;
   }
 
   @media (max-width: 480px) {
-    font-size: 40px;
+    font-size: 44px;
   }
 }
 
 .statsTitle {
-  color: #000b3c;
+  color: rgba(255, 255, 255, 0.95);
   font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 22px;
-  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 8px;
+  text-shadow: 0 1px 4px rgba(0, 45, 203, 0.2);
+  transition: all 0.4s ease;
 
   @media (max-width: 768px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 480px) {
     font-size: 18px;
   }
 }
 
 .statsDescription {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
   font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 19px;
+  line-height: 1.4;
   margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 45, 203, 0.1);
+  transition: all 0.4s ease;
 
   @media (max-width: 768px) {
+    font-size: 15px;
+  }
+
+  @media (max-width: 480px) {
     font-size: 14px;
   }
 }
