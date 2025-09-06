@@ -275,7 +275,7 @@ export const CronScheduler = () => {
 
   const getFrequencyInTime = (blocks: string) => {
     const blockNum = parseInt(blocks);
-    const seconds = blockNum * 3; // ~3 seconds per block
+    const seconds = blockNum * 15; // ~15 seconds per block
     if (seconds < 60) return `${seconds} seconds`;
     if (seconds < 3600) return `${Math.round(seconds / 60)} minutes`;
     if (seconds < 86400) return `${Math.round(seconds / 3600)} hours`;
@@ -284,14 +284,14 @@ export const CronScheduler = () => {
 
   const getDurationInTime = (blocks: string) => {
     const blockNum = parseInt(blocks);
-    const seconds = blockNum * 3;
+    const seconds = blockNum * 15;
     if (seconds < 3600) return `${Math.round(seconds / 60)} minutes`;
     if (seconds < 86400) return `${Math.round(seconds / 3600)} hours`;
     return `${Math.round(seconds / 86400)} days`;
   };
 
   const estimateDailyCost = () => {
-    const blocksPerDay = 28800; // 24 hours * 60 minutes * 20 blocks per minute
+    const blocksPerDay = 5760; // 24 hours * 60 minutes * 4 blocks per minute (15 seconds per block)
     const maintenanceCost = (blocksPerDay * 100 * parseInt(maxGasPrice)) / 1e9; // 100 gas per block
     const executionCost =
       ((blocksPerDay / parseInt(frequency)) *
@@ -767,7 +767,7 @@ export const CronScheduler = () => {
             <div className={s.infoBox}>
               <ul className={s.tipList}>
                 <li>
-                  <strong>Block Time:</strong> Helios produces blocks every ~2
+                  <strong>Block Time:</strong> Helios produces blocks every ~15
                   seconds
                 </li>
                 <li>
