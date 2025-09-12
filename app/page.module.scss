@@ -214,7 +214,6 @@
 
 // Automated Tasks Section
 .automatedTasksSection {
-  background: #fff;
   padding: 137px 0;
   position: relative;
 
@@ -410,7 +409,7 @@
   background: linear-gradient(
     180deg,
     rgba(0, 45, 203, 0.8) 30.07%,
-    rgba(226, 235, 255, 1) 111.58%
+    rgb(152, 185, 255) 100%
   );
   padding: 68px 0 67px;
   position: relative;
@@ -418,6 +417,11 @@
   @media (max-width: 768px) {
     padding: 50px 0;
   }
+}
+
+.gradientWrap {
+  position: relative;
+  background: linear-gradient(180deg, rgb(152, 185, 255) 0%, #ffffff 100%);
 }
 
 .networkStatsContent {
@@ -724,7 +728,7 @@
 // Content section wrapper (for connected users)
 .contentWrapper {
   position: relative;
-  background: #fff;
+  background: transparent;
 
   &::before {
     content: "";
@@ -733,13 +737,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(180deg, transparent 60%, #fff 110%),
-      linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.9) -10%,
-        rgba(0, 45, 203, 0.15) 50%,
-        rgba(255, 255, 255, 0.9) 110%
-      );
     opacity: 1;
     z-index: 0;
     pointer-events: none;
@@ -839,3 +836,5 @@
     gap: var(--spacing-l);
   }
 }
+
+/* Why Chronos styles moved into reusable components/helper */

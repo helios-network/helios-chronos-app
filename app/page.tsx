@@ -6,6 +6,7 @@ import { Card } from "@/components/card";
 import { useCronStatistics } from "@/hooks/useCrons";
 import s from "./page.module.scss";
 import Image from "next/image";
+import { Helper } from "@/components/helper";
 import Link from "next/link";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -301,19 +302,29 @@ export default function HomePage() {
     <div className={s.container}>
       <HeroSection />
       <NetworkStatisticsSection />
-      <AutomatedTasksSection />
 
-      {/* Show existing content only when wallet is connected */}
+      {/* Not connected: show connect wallet section with gradient continuing into Helper */}
+      {!address && (
+        <div className={s.gradientWrap}>
+          <AutomatedTasksSection />
+          <Helper />
+        </div>
+      )}
+
+      {/* Connected: extend gradient from content (Latest Cron Transactions) to Helper */}
       {address && (
-        <div className={s.contentWrapper}>
-          <div className={s.content}>
-            <Card className={s.sectionCard}>
-              <CronList />
-            </Card>
-            <Card className={s.sectionCard}>
-              <CronReceipts />
-            </Card>
+        <div className={s.gradientWrap}>
+          <div className={s.contentWrapper}>
+            <div className={s.content}>
+              <Card className={s.sectionCard}>
+                <CronList />
+              </Card>
+              <Card className={s.sectionCard}>
+                <CronReceipts />
+              </Card>
+            </div>
           </div>
+          <Helper />
         </div>
       )}
     </div>

@@ -9,28 +9,16 @@
 }
 
 .sectionHeading {
-  color: #002dcb !important;
-  font-size: 2.5rem !important;
+  color: #ffffff !important;
+  font-size: 48px !important;
   font-weight: 800 !important;
   position: relative;
-  margin-bottom: 24px !important;
+  line-height: 1.1 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 2px 8px rgba(0, 20, 80, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
   letter-spacing: -0.01em;
-  text-shadow: 0 2px 4px rgba(0, 45, 203, 0.1);
   font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif !important;
   line-height: 1.1 !important;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: linear-gradient(90deg, #002dcb, rgba(0, 45, 203, 0.6));
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 45, 203, 0.3);
-  }
 
   @media (max-width: 768px) {
     font-size: 2rem !important;
@@ -42,10 +30,13 @@
 }
 
 .sectionDescription {
-  color: rgba(0, 45, 203, 0.7);
-  font-size: 1.1rem;
-  margin: 0 auto 32px;
-  max-width: 600px;
+  color: #5c6584;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 36px;
+
   line-height: 1.6;
   font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
 
@@ -59,8 +50,8 @@
   justify-content: space-between;
   align-items: center;
   margin: 32px 0;
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(0, 45, 203, 0.1);
   border-radius: 16px;
   backdrop-filter: blur(10px);
@@ -83,7 +74,7 @@
   padding: 8px 16px;
   border-radius: 12px;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 800;
   font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
   color: #059669;
 }
@@ -164,6 +155,8 @@
 .errorState {
   text-align: center;
   padding: 60px 20px;
+  background: rgba(159, 190, 255, 0.2);
+  border: 1px solid rgba(0, 45, 203, 0.1);
 
   h2 {
     margin-bottom: 16px;
@@ -212,15 +205,19 @@
   font-weight: 700 !important;
   margin-bottom: 16px !important;
   font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif !important;
-  font-size: 1.5rem !important;
+  font-size: 1.75rem !important;
 }
 
 .emptyStateMessage {
-  color: rgba(0, 45, 203, 0.7);
-  font-size: 1.1rem;
+  color: #5c6584;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  text-align: center;
+  font-size: 20px;
   line-height: 1.6;
   margin-bottom: 24px;
-  max-width: 500px;
+  max-width: 800px !important;
+  font-weight: 700;
+
   margin-left: auto;
   margin-right: auto;
   font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
