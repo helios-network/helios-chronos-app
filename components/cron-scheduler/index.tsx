@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/button";
 import { Card } from "@/components/card";
@@ -202,10 +202,16 @@ const TASK_TEMPLATES = [
 
 type Step = "template" | "configure" | "review" | "deploy";
 
-export const CronScheduler = () => {
+type CronSchedulerProps = { onStepChange?: (step: Step) => void };
+
+export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
   const { createCron, feedback, resetFeedback, isLoading } = useCreateCron();
 
   const [currentStep, setCurrentStep] = useState<Step>("template");
+
+  useEffect(() => {
+    onStepChange?.(currentStep);
+  }, [currentStep, onStepChange]);
   const [selectedTemplate, setSelectedTemplate] = useState<
     (typeof TASK_TEMPLATES)[0] | null
   >(null);

@@ -17,9 +17,14 @@ const HeliosIcon = () => (
   />
 );
 
+import { useState } from "react";
+
 export default function SchedulePage() {
   const { isConnected } = useAccount();
   const { open: openConnectModal } = useAppKit();
+  const [schedulerStep, setSchedulerStep] = useState<
+    "template" | "configure" | "review" | "deploy"
+  >("template");
 
   return (
     <div className={s.container}>
@@ -107,7 +112,7 @@ export default function SchedulePage() {
         >
           <div className={s.mainContent}>
             {isConnected ? (
-              <CronScheduler />
+              <CronScheduler onStepChange={setSchedulerStep} />
             ) : (
               <div className={s.walletPrompt}>
                 <h2 className={s.walletPromptTitle}>Connect Your Wallet</h2>
@@ -151,7 +156,9 @@ export default function SchedulePage() {
         </section>
 
         {/* Helper section (reusable) */}
-        <Helper />
+        {!(schedulerStep === "configure" || schedulerStep === "deploy") && (
+          <Helper />
+        )}
       </div>
     </div>
   );
