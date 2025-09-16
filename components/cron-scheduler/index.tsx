@@ -484,9 +484,19 @@ export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
           }
         >
           <div className={s.stepIcon}>
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
               <circle cx="12" cy="12" r="3" />
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09c.62 0 1.18-.39 1.51-1 .27-.72.13-1.36-.33-1.82l-.06-.06A2 2 0 1 1 7.04 3.4l.06.06c.46.46 1.1.6 1.82.33H9c.62 0 1.18-.39 1.51-1V3a2 2 0 1 1 4 0v.09c0 .62.39 1.18 1 1.51.72.27 1.36.13 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06c-.46.46-.6 1.1-.33 1.82V9c0 .62.39 1.18 1 1.51H21a2 2 0 1 1 0 4h-.09c-.62 0-1.18.39-1.51 1Z" />
             </svg>
           </div>
           <span>Configure</span>
@@ -522,364 +532,370 @@ export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
       <div className={s.wizardContainer}>
         <div className={s.wizardHeader}>
           <ProgressIndicator currentStep={currentStep} />
-          <Heading level={2} size="medium" className={s.wizardTitle}>
-            Configure Your {selectedTemplate?.name}
-          </Heading>
-          <p className={s.wizardSubtitle}>
-            Set up the details for your automated task
-          </p>
         </div>
+        <Card className={s.configureContainerCard}>
+          <div className={s.configureHeader}>
+            <Heading level={2} size="medium" className={s.wizardTitle}>
+              Configure Your {selectedTemplate?.name}
+            </Heading>
+            <p className={s.wizardSubtitle}>
+              Set up the details for your automated task
+            </p>
+          </div>
 
-        {feedback.message && (
-          <Alert
-            variant={feedback.status}
-            className={s.alert}
-            onClose={resetFeedback}
-          >
-            {feedback.message}
-          </Alert>
-        )}
+          {feedback.message && (
+            <Alert
+              variant={feedback.status}
+              className={s.alert}
+              onClose={resetFeedback}
+            >
+              {feedback.message}
+            </Alert>
+          )}
 
-        <div className={s.configurationForm}>
-          <Card className={s.formSection}>
-            <h3 className={s.sectionTitle}>
-              <span className={s.sectionIcon} aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          <div className={s.configurationForm}>
+            <Card className={s.formSection}>
+              <h3 className={s.sectionTitle}>
+                <span className={s.sectionIcon} aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+                Task Details
+              </h3>
+
+              <div className={s.formGroup}>
+                <label htmlFor="taskName" className={s.label}>
+                  Task Name
+                </label>
+                <Input
+                  id="taskName"
+                  placeholder="My Automated Task"
+                  value={taskName}
+                  onChange={(e) => setTaskName(e.target.value)}
+                  className={s.input}
+                />
+                <p className={s.hint}>Give your task a memorable name</p>
+              </div>
+
+              <div className={s.formGroup}>
+                <label htmlFor="taskDescription" className={s.label}>
+                  Description (Optional)
+                </label>
+                <Input
+                  id="taskDescription"
+                  placeholder="What does this task do?"
+                  value={taskDescription}
+                  onChange={(e) => setTaskDescription(e.target.value)}
+                  className={s.input}
+                />
+                <p className={s.hint}>
+                  Briefly describe the purpose so it’s easy to find later
+                </p>
+              </div>
+
+              {selectedTemplate && (
+                <div className={s.sectionMeta}>
+                  <span className={s.badge}>{selectedTemplate.category}</span>
+                  <span className={s.badge}>{selectedTemplate.difficulty}</span>
+                  {selectedTemplate.estimatedCost && (
+                    <span className={s.badge}>
+                      {selectedTemplate.estimatedCost}
+                    </span>
+                  )}
+                  {selectedTemplate.setupTime && (
+                    <span className={s.badge}>
+                      {selectedTemplate.setupTime}
+                    </span>
+                  )}
+                </div>
+              )}
+
+              <div className={s.infoBox}>
+                <ul className={s.tipList}>
+                  <li>Use a clear action verb, e.g. “Update price feed”</li>
+                  <li>
+                    Match the name to the target function for quick scanning
+                  </li>
+                  <li>Descriptions support team/shared context</li>
+                </ul>
+              </div>
+            </Card>
+
+            <Card className={s.formSection}>
+              <h3 className={s.sectionTitle}>
+                <span className={s.sectionIcon} aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
-                    fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                  >
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14,2 14,8 20,8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10,9 9,9 8,9" />
+                  </svg>
+                </span>
+                Target Contract
+              </h3>
+
+              <div className={s.formGroup}>
+                <label htmlFor="contractAddress" className={s.label}>
+                  Smart Contract Address
+                </label>
+                <Input
+                  id="contractAddress"
+                  placeholder="0x1234567890123456789012345678901234567890"
+                  value={contractAddress}
+                  onChange={(e) => setContractAddress(e.target.value)}
+                  required
+                  className={s.input}
+                />
+                <p className={s.hint}>
+                  The address of the smart contract you want to automate
+                </p>
+              </div>
+
+              <div className={s.formGroup}>
+                <label htmlFor="methodName" className={s.label}>
+                  Function Name
+                </label>
+                <Input
+                  id="methodName"
+                  placeholder="updatePrice"
+                  value={methodName}
+                  onChange={(e) => setMethodName(e.target.value)}
+                  required
+                  className={s.input}
+                />
+                <p className={s.hint}>The function to call automatically</p>
+              </div>
+
+              <div className={s.formGroup}>
+                <label htmlFor="params" className={s.label}>
+                  Function Parameters (Optional)
+                </label>
+                <Input
+                  id="params"
+                  placeholder="param1, param2, param3"
+                  value={params}
+                  onChange={(e) => setParams(e.target.value)}
+                  className={s.input}
+                />
+                <p className={s.hint}>
+                  Parameters to pass to the function (comma-separated)
+                </p>
+              </div>
+
+              <div className={s.formGroup}>
+                <label htmlFor="abiJson" className={s.label}>
+                  Contract ABI
+                </label>
+                <Textarea
+                  id="abiJson"
+                  placeholder='[{"inputs":[],"name":"updatePrice","outputs":[],"stateMutability":"nonpayable","type":"function"}]'
+                  value={abiJson}
+                  onChange={(e) => setAbiJson(e.target.value)}
+                  required
+                  className={s.textarea}
+                  rows={4}
+                />
+                <p className={s.hint}>
+                  The ABI (Application Binary Interface) of your contract
+                  function
+                </p>
+              </div>
+            </Card>
+
+            <Card className={s.formSection}>
+              <h3 className={s.sectionTitle}>
+                <span className={s.sectionIcon} aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12,6 12,12 16,14" />
+                  </svg>
+                </span>
+                Timing & Duration
+              </h3>
+
+              <div className={s.formRow}>
+                <div className={s.formGroup}>
+                  <label htmlFor="frequency" className={s.label}>
+                    Run Every
+                  </label>
+                  <Input
+                    id="frequency"
+                    type="number"
+                    placeholder="100"
+                    value={frequency}
+                    onChange={(e) => setFrequency(e.target.value)}
+                    required
+                    min="1"
+                    className={s.input}
                   />
-                </svg>
-              </span>
-              Task Details
-            </h3>
+                  <p className={s.hint}>
+                    {frequency && `≈ ${getFrequencyInTime(frequency)}`}
+                  </p>
+                </div>
 
-            <div className={s.formGroup}>
-              <label htmlFor="taskName" className={s.label}>
-                Task Name
-              </label>
-              <Input
-                id="taskName"
-                placeholder="My Automated Task"
-                value={taskName}
-                onChange={(e) => setTaskName(e.target.value)}
-                className={s.input}
-              />
-              <p className={s.hint}>Give your task a memorable name</p>
-            </div>
-
-            <div className={s.formGroup}>
-              <label htmlFor="taskDescription" className={s.label}>
-                Description (Optional)
-              </label>
-              <Input
-                id="taskDescription"
-                placeholder="What does this task do?"
-                value={taskDescription}
-                onChange={(e) => setTaskDescription(e.target.value)}
-                className={s.input}
-              />
-              <p className={s.hint}>
-                Briefly describe the purpose so it’s easy to find later
-              </p>
-            </div>
-
-            {selectedTemplate && (
-              <div className={s.sectionMeta}>
-                <span className={s.badge}>{selectedTemplate.category}</span>
-                <span className={s.badge}>{selectedTemplate.difficulty}</span>
-                {selectedTemplate.estimatedCost && (
-                  <span className={s.badge}>
-                    {selectedTemplate.estimatedCost}
-                  </span>
-                )}
-                {selectedTemplate.setupTime && (
-                  <span className={s.badge}>{selectedTemplate.setupTime}</span>
-                )}
+                <div className={s.formGroup}>
+                  <label htmlFor="expirationBlocks" className={s.label}>
+                    Run For
+                  </label>
+                  <Input
+                    id="expirationBlocks"
+                    type="number"
+                    placeholder="1000"
+                    value={expirationBlocks}
+                    onChange={(e) => setExpirationBlocks(e.target.value)}
+                    required
+                    min="1"
+                    className={s.input}
+                  />
+                  <p className={s.hint}>
+                    {expirationBlocks &&
+                      `≈ ${getDurationInTime(expirationBlocks)}`}
+                  </p>
+                </div>
               </div>
-            )}
 
-            <div className={s.infoBox}>
-              <ul className={s.tipList}>
-                <li>Use a clear action verb, e.g. “Update price feed”</li>
-                <li>
-                  Match the name to the target function for quick scanning
-                </li>
-                <li>Descriptions support team/shared context</li>
-              </ul>
-            </div>
-          </Card>
+              <div className={s.infoBox}>
+                <ul className={s.tipList}>
+                  <li>
+                    <strong>Block Time:</strong> Helios produces blocks every
+                    ~15 seconds
+                  </li>
+                  <li>
+                    <strong>Frequency:</strong> Lower numbers = more frequent
+                    execution (higher costs)
+                  </li>
+                  <li>
+                    <strong>Duration:</strong> Task automatically stops after
+                    the specified blocks
+                  </li>
+                  <li>
+                    <strong>Tip:</strong> Start with longer intervals to test,
+                    then optimize for your needs
+                  </li>
+                </ul>
+              </div>
+            </Card>
 
-          <Card className={s.formSection}>
-            <h3 className={s.sectionTitle}>
-              <span className={s.sectionIcon} aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                  <polyline points="14,2 14,8 20,8" />
-                  <line x1="16" y1="13" x2="8" y2="13" />
-                  <line x1="16" y1="17" x2="8" y2="17" />
-                  <polyline points="10,9 9,9 8,9" />
-                </svg>
-              </span>
-              Target Contract
-            </h3>
+            <Card className={s.formSection}>
+              <h3 className={s.sectionTitle}>
+                <span className={s.sectionIcon} aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </span>
+                Gas & Funding
+              </h3>
 
-            <div className={s.formGroup}>
-              <label htmlFor="contractAddress" className={s.label}>
-                Smart Contract Address
-              </label>
-              <Input
-                id="contractAddress"
-                placeholder="0x1234567890123456789012345678901234567890"
-                value={contractAddress}
-                onChange={(e) => setContractAddress(e.target.value)}
-                required
-                className={s.input}
-              />
-              <p className={s.hint}>
-                The address of the smart contract you want to automate
-              </p>
-            </div>
+              <div className={s.formRow}>
+                <div className={s.formGroup}>
+                  <label htmlFor="gasLimit" className={s.label}>
+                    Gas Limit
+                  </label>
+                  <Input
+                    id="gasLimit"
+                    type="number"
+                    placeholder="300000"
+                    value={gasLimit}
+                    onChange={(e) => setGasLimit(e.target.value)}
+                    required
+                    min="21000"
+                    className={s.input}
+                  />
+                  <p className={s.hint}>Maximum gas per execution</p>
+                </div>
 
-            <div className={s.formGroup}>
-              <label htmlFor="methodName" className={s.label}>
-                Function Name
-              </label>
-              <Input
-                id="methodName"
-                placeholder="updatePrice"
-                value={methodName}
-                onChange={(e) => setMethodName(e.target.value)}
-                required
-                className={s.input}
-              />
-              <p className={s.hint}>The function to call automatically</p>
-            </div>
+                <div className={s.formGroup}>
+                  <label htmlFor="maxGasPrice" className={s.label}>
+                    Max Gas Price (Gwei)
+                  </label>
+                  <Input
+                    id="maxGasPrice"
+                    placeholder="8"
+                    value={maxGasPrice}
+                    onChange={(e) => setMaxGasPrice(e.target.value)}
+                    required
+                    className={s.input}
+                  />
+                  <p className={s.hint}>Maximum gas price to pay</p>
+                </div>
+              </div>
 
-            <div className={s.formGroup}>
-              <label htmlFor="params" className={s.label}>
-                Function Parameters (Optional)
-              </label>
-              <Input
-                id="params"
-                placeholder="param1, param2, param3"
-                value={params}
-                onChange={(e) => setParams(e.target.value)}
-                className={s.input}
-              />
-              <p className={s.hint}>
-                Parameters to pass to the function (comma-separated)
-              </p>
-            </div>
-
-            <div className={s.formGroup}>
-              <label htmlFor="abiJson" className={s.label}>
-                Contract ABI
-              </label>
-              <Textarea
-                id="abiJson"
-                placeholder='[{"inputs":[],"name":"updatePrice","outputs":[],"stateMutability":"nonpayable","type":"function"}]'
-                value={abiJson}
-                onChange={(e) => setAbiJson(e.target.value)}
-                required
-                className={s.textarea}
-                rows={4}
-              />
-              <p className={s.hint}>
-                The ABI (Application Binary Interface) of your contract function
-              </p>
-            </div>
-          </Card>
-
-          <Card className={s.formSection}>
-            <h3 className={s.sectionTitle}>
-              <span className={s.sectionIcon} aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <polyline points="12,6 12,12 16,14" />
-                </svg>
-              </span>
-              Timing & Duration
-            </h3>
-
-            <div className={s.formRow}>
               <div className={s.formGroup}>
-                <label htmlFor="frequency" className={s.label}>
-                  Run Every
+                <label htmlFor="amountToDeposit" className={s.label}>
+                  Initial Deposit (HLS)
                 </label>
                 <Input
-                  id="frequency"
-                  type="number"
-                  placeholder="100"
-                  value={frequency}
-                  onChange={(e) => setFrequency(e.target.value)}
+                  id="amountToDeposit"
+                  placeholder="1"
+                  value={amountToDeposit}
+                  onChange={(e) => setAmountToDeposit(e.target.value)}
                   required
-                  min="1"
                   className={s.input}
                 />
                 <p className={s.hint}>
-                  {frequency && `≈ ${getFrequencyInTime(frequency)}`}
+                  Funds to cover gas costs. Est. daily cost: ~
+                  {estimateDailyCost()} HLS
                 </p>
               </div>
-
-              <div className={s.formGroup}>
-                <label htmlFor="expirationBlocks" className={s.label}>
-                  Run For
-                </label>
-                <Input
-                  id="expirationBlocks"
-                  type="number"
-                  placeholder="1000"
-                  value={expirationBlocks}
-                  onChange={(e) => setExpirationBlocks(e.target.value)}
-                  required
-                  min="1"
-                  className={s.input}
-                />
-                <p className={s.hint}>
-                  {expirationBlocks &&
-                    `≈ ${getDurationInTime(expirationBlocks)}`}
-                </p>
-              </div>
-            </div>
-
-            <div className={s.infoBox}>
-              <ul className={s.tipList}>
-                <li>
-                  <strong>Block Time:</strong> Helios produces blocks every ~15
-                  seconds
-                </li>
-                <li>
-                  <strong>Frequency:</strong> Lower numbers = more frequent
-                  execution (higher costs)
-                </li>
-                <li>
-                  <strong>Duration:</strong> Task automatically stops after the
-                  specified blocks
-                </li>
-                <li>
-                  <strong>Tip:</strong> Start with longer intervals to test,
-                  then optimize for your needs
-                </li>
-              </ul>
-            </div>
-          </Card>
-
-          <Card className={s.formSection}>
-            <h3 className={s.sectionTitle}>
-              <span className={s.sectionIcon} aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                </svg>
-              </span>
-              Gas & Funding
-            </h3>
-
-            <div className={s.formRow}>
-              <div className={s.formGroup}>
-                <label htmlFor="gasLimit" className={s.label}>
-                  Gas Limit
-                </label>
-                <Input
-                  id="gasLimit"
-                  type="number"
-                  placeholder="300000"
-                  value={gasLimit}
-                  onChange={(e) => setGasLimit(e.target.value)}
-                  required
-                  min="21000"
-                  className={s.input}
-                />
-                <p className={s.hint}>Maximum gas per execution</p>
-              </div>
-
-              <div className={s.formGroup}>
-                <label htmlFor="maxGasPrice" className={s.label}>
-                  Max Gas Price (Gwei)
-                </label>
-                <Input
-                  id="maxGasPrice"
-                  placeholder="8"
-                  value={maxGasPrice}
-                  onChange={(e) => setMaxGasPrice(e.target.value)}
-                  required
-                  className={s.input}
-                />
-                <p className={s.hint}>Maximum gas price to pay</p>
-              </div>
-            </div>
-
-            <div className={s.formGroup}>
-              <label htmlFor="amountToDeposit" className={s.label}>
-                Initial Deposit (HLS)
-              </label>
-              <Input
-                id="amountToDeposit"
-                placeholder="1"
-                value={amountToDeposit}
-                onChange={(e) => setAmountToDeposit(e.target.value)}
-                required
-                className={s.input}
-              />
-              <p className={s.hint}>
-                Funds to cover gas costs. Est. daily cost: ~
-                {estimateDailyCost()} HLS
-              </p>
-            </div>
-          </Card>
-
-          <div className={s.wizardActions}>
-            <Button
-              variant="outline"
-              onClick={() => setCurrentStep("template")}
-              className={s.backButton}
-            >
-              ← Back to Templates
-            </Button>
-            <Button
-              onClick={() => setCurrentStep("review")}
-              disabled={!contractAddress || !methodName || !abiJson}
-              className={s.nextButton}
-            >
-              Review & Deploy →
-            </Button>
+            </Card>
           </div>
+        </Card>
+        <div className={s.wizardActions}>
+          <Button
+            variant="outline"
+            onClick={() => setCurrentStep("template")}
+            className={s.backButton}
+          >
+            ← Back to Templates
+          </Button>
+          <Button
+            onClick={() => setCurrentStep("review")}
+            disabled={!contractAddress || !methodName || !abiJson}
+            className={s.nextButton}
+          >
+            Review & Deploy →
+          </Button>
         </div>
       </div>
     );
