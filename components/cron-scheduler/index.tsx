@@ -907,119 +907,214 @@ export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
       <div className={s.wizardContainer}>
         <div className={s.wizardHeader}>
           <ProgressIndicator currentStep={currentStep} />
-          <Heading level={2} size="medium" className={s.wizardTitle}>
-            Review Your Automated Task
-          </Heading>
-          <p className={s.wizardSubtitle}>
-            Double-check everything before deploying your task
-          </p>
         </div>
 
-        {feedback.message && (
-          <Alert
-            variant={feedback.status}
-            className={s.alert}
-            onClose={resetFeedback}
-          >
-            {feedback.message}
-          </Alert>
-        )}
-
-        <div className={s.reviewContainer}>
-          <Card className={s.reviewCard}>
-            <h3 className={s.reviewTitle}>📋 Task Summary</h3>
-            <div className={s.reviewGrid}>
-              <div className={s.reviewItem}>
-                <span className={s.reviewLabel}>Task Name:</span>
-                <span className={s.reviewValue}>{taskName}</span>
-              </div>
-              <div className={s.reviewItem}>
-                <span className={s.reviewLabel}>Template:</span>
-                <span className={s.reviewValue}>{selectedTemplate?.name}</span>
-              </div>
-              <div className={s.reviewItem}>
-                <span className={s.reviewLabel}>Contract:</span>
-                <span className={s.reviewValue}>{contractAddress}</span>
-              </div>
-              <div className={s.reviewItem}>
-                <span className={s.reviewLabel}>Function:</span>
-                <span className={s.reviewValue}>{methodName}</span>
-              </div>
-              <div className={s.reviewItem}>
-                <span className={s.reviewLabel}>Frequency:</span>
-                <span className={s.reviewValue}>
-                  Every {getFrequencyInTime(frequency)}
-                </span>
-              </div>
-              <div className={s.reviewItem}>
-                <span className={s.reviewLabel}>Duration:</span>
-                <span className={s.reviewValue}>
-                  {getDurationInTime(expirationBlocks)}
-                </span>
-              </div>
-              <div className={s.reviewItem}>
-                <span className={s.reviewLabel}>Initial Deposit:</span>
-                <span className={s.reviewValue}>{amountToDeposit} HLS</span>
-              </div>
-              <div className={s.reviewItem}>
-                <span className={s.reviewLabel}>Est. Daily Cost:</span>
-                <span className={s.reviewValue}>
-                  ~{estimateDailyCost()} HLS
-                </span>
-              </div>
-            </div>
-          </Card>
-
-          <Card className={s.costBreakdown}>
-            <h3 className={s.reviewTitle}>💰 Cost Breakdown</h3>
-            <div className={s.costItems}>
-              <div className={s.costItem}>
-                <span className={s.costLabel}>
-                  Maintenance (100 gas/block):
-                </span>
-                <span className={s.costValue}>
-                  ~{((28800 * 100 * parseInt(maxGasPrice)) / 1e9).toFixed(4)}{" "}
-                  HLS/day
-                </span>
-              </div>
-              <div className={s.costItem}>
-                <span className={s.costLabel}>Execution costs:</span>
-                <span className={s.costValue}>
-                  ~
-                  {(
-                    ((28800 / parseInt(frequency)) *
-                      parseInt(gasLimit) *
-                      parseInt(maxGasPrice)) /
-                    1e9
-                  ).toFixed(4)}{" "}
-                  HLS/day
-                </span>
-              </div>
-              <div className={s.costTotal}>
-                <span className={s.costLabel}>Total estimated:</span>
-                <span className={s.costValue}>
-                  ~{estimateDailyCost()} HLS/day
-                </span>
-              </div>
-            </div>
-            <p className={s.costNote}>
-              💡 You can add more funds anytime by sending HLS to your
-              task&apos;s wallet address
+        <Card className={s.configureContainerCard}>
+          <div className={s.configureHeader}>
+            <Heading level={2} size="medium" className={s.wizardTitle}>
+              Review Your Automated Task
+            </Heading>
+            <p className={s.wizardSubtitle}>
+              Double-check everything before deploying your task
             </p>
-          </Card>
+          </div>
 
-          <Card className={s.warningCard}>
-            <h3 className={s.warningTitle}>⚠️ Important Notes</h3>
-            <ul className={s.warningList}>
-              <li>
-                Your task will create a unique wallet address for gas payments
-              </li>
-              <li>The task will automatically stop when funds run out</li>
-              <li>You can cancel anytime to get remaining funds back</li>
-              <li>Make sure your contract function is public and callable</li>
-            </ul>
-          </Card>
-        </div>
+          {feedback.message && (
+            <Alert
+              variant={feedback.status}
+              className={s.alert}
+              onClose={resetFeedback}
+            >
+              {feedback.message}
+            </Alert>
+          )}
+
+          <div className={s.configurationForm}>
+            <Card className={s.formSection}>
+              <h3 className={s.sectionTitle}>
+                <span className={s.sectionIcon} aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14,2 14,8 20,8" />
+                  </svg>
+                </span>
+                Task Summary
+              </h3>
+              <div className={s.reviewGrid}>
+                <div className={s.reviewItem}>
+                  <span className={s.reviewLabel}>Task Name:</span>
+                  <span className={s.reviewValue}>{taskName}</span>
+                </div>
+                <div className={s.reviewItem}>
+                  <span className={s.reviewLabel}>Template:</span>
+                  <span className={s.reviewValue}>
+                    {selectedTemplate?.name}
+                  </span>
+                </div>
+                <div className={s.reviewItem}>
+                  <span className={s.reviewLabel}>Contract:</span>
+                  <span className={s.reviewValue}>{contractAddress}</span>
+                </div>
+                <div className={s.reviewItem}>
+                  <span className={s.reviewLabel}>Function:</span>
+                  <span className={s.reviewValue}>{methodName}</span>
+                </div>
+                <div className={s.reviewItem}>
+                  <span className={s.reviewLabel}>Frequency:</span>
+                  <span className={s.reviewValue}>
+                    Every {getFrequencyInTime(frequency)}
+                  </span>
+                </div>
+                <div className={s.reviewItem}>
+                  <span className={s.reviewLabel}>Duration:</span>
+                  <span className={s.reviewValue}>
+                    {getDurationInTime(expirationBlocks)}
+                  </span>
+                </div>
+                <div className={s.reviewItem}>
+                  <span className={s.reviewLabel}>Initial Deposit:</span>
+                  <span className={s.reviewValue}>{amountToDeposit} HLS</span>
+                </div>
+                <div className={s.reviewItem}>
+                  <span className={s.reviewLabel}>Est. Daily Cost:</span>
+                  <span className={s.reviewValue}>
+                    ~{estimateDailyCost()} HLS
+                  </span>
+                </div>
+              </div>
+            </Card>
+
+            <Card className={s.formSection}>
+              <h3 className={s.sectionTitle}>
+                <span className={s.sectionIcon} aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </span>
+                Cost Breakdown
+              </h3>
+              <div className={s.costItems}>
+                <div className={s.costItem}>
+                  <span className={s.costLabel}>
+                    Maintenance (100 gas/block):
+                  </span>
+                  <span className={s.costValue}>
+                    ~{((28800 * 100 * parseInt(maxGasPrice)) / 1e9).toFixed(4)}{" "}
+                    HLS/day
+                  </span>
+                </div>
+                <div className={s.costItem}>
+                  <span className={s.costLabel}>Execution costs:</span>
+                  <span className={s.costValue}>
+                    ~
+                    {(
+                      ((28800 / parseInt(frequency)) *
+                        parseInt(gasLimit) *
+                        parseInt(maxGasPrice)) /
+                      1e9
+                    ).toFixed(4)}{" "}
+                    HLS/day
+                  </span>
+                </div>
+                <div className={s.costTotal}>
+                  <span className={s.costLabel}>Total estimated:</span>
+                  <span className={s.costValue}>
+                    ~{estimateDailyCost()} HLS/day
+                  </span>
+                </div>
+              </div>
+              <p className={s.costNote}>
+                <span className={s.inlineIcon} aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 8v4" />
+                    <path d="M12 16h.01" />
+                  </svg>
+                </span>
+                <span className={s.costNoteText}>
+                  You can add more funds anytime by sending HLS to your
+                  task&#39;s wallet address
+                </span>
+              </p>
+            </Card>
+
+            <Card className={`${s.formSection} ${s.fullWidthSection}`}>
+              <h3 className={s.sectionTitle}>
+                <span className={s.sectionIcon} aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </span>
+                Important Notes
+              </h3>
+              <ul className={s.warningList}>
+                <li>
+                  When deployed, a unique wallet is created to pay gas for this
+                  task. Fund it with HLS to keep the automation running.
+                </li>
+                <li>
+                  The task stops automatically if the wallet runs out of funds
+                  or after the specified duration (expiration blocks).
+                </li>
+                <li>
+                  You can cancel the task at any time. Any remaining funds can
+                  be withdrawn back to your wallet.
+                </li>
+                <li>
+                  Ensure the target function is publicly callable and doesn’t
+                  require msg.sender to be a specific address (unless handled by
+                  your contract).
+                </li>
+                <li>
+                  Validate your ABI and parameters. Incorrect ABI or function
+                  signature will cause execution failures.
+                </li>
+                <li>
+                  Gas settings affect cost and reliability. Higher max gas price
+                  increases chance of timely execution.
+                </li>
+              </ul>
+            </Card>
+          </div>
+        </Card>
 
         <div className={s.wizardActions}>
           <Button
@@ -1034,7 +1129,44 @@ export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
             disabled={isLoading}
             className={s.deployButton}
           >
-            {isLoading ? "Deploying Task..." : "🚀 Deploy Task"}
+            {isLoading ? (
+              "Deploying Task..."
+            ) : (
+              <>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 19l4-1 9-9a2.828 2.828 0 10-4-4L5 14l-1 5z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M15 5l4 4"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M3 21l4-1-3-3-1 4z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                  />
+                </svg>
+                Deploy Task
+              </>
+            )}
           </Button>
         </div>
       </div>

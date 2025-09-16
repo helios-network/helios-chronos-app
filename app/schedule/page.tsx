@@ -156,9 +156,7 @@ export default function SchedulePage() {
         </section>
 
         {/* Helper section (reusable) */}
-        {!(schedulerStep === "configure" || schedulerStep === "deploy") && (
-          <Helper />
-        )}
+        {schedulerStep === "template" && <Helper />}
       </div>
     </div>
   );
