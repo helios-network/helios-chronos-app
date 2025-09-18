@@ -6,7 +6,7 @@ import { Heading } from "@/components/heading";
 import { Button } from "@/components/button";
 import { useAccount } from "wagmi";
 import { Cron, ExecutionStage } from "@/types/cron";
-import { formatDistanceToNow } from "date-fns";
+// removed formatDistanceToNow as 'Queued' row is hidden
 import { useCreateCron } from "@/hooks/useCreateCron";
 import { useWeb3Provider } from "@/hooks/useWeb3Provider";
 import { useEffect, useMemo, useState } from "react";
@@ -47,7 +47,6 @@ const getExecutionStageColor = (stage: ExecutionStage): string => {
 };
 
 const CronCard = ({ cron, selected, onToggleSelect, onEdit }: { cron: Cron; selected: boolean; onToggleSelect: (id: number, checked: boolean) => void; onEdit: (cron: Cron) => void }) => {
-  const queueDate = new Date(cron.queueTimestamp * 1000);
   const { cancelCron, isCancelling } = useCreateCron();
 
   // Derive stage: treat archived as finished
@@ -71,6 +70,7 @@ const CronCard = ({ cron, selected, onToggleSelect, onEdit }: { cron: Cron; sele
             type="checkbox"
             checked={selected}
             onChange={(e) => onToggleSelect(cron.id, e.target.checked)}
+            className={s.selectCheckbox}
             style={{ marginRight: 8 }}
           />
           <span className={s.label}>ID:</span>
@@ -128,12 +128,7 @@ const CronCard = ({ cron, selected, onToggleSelect, onEdit }: { cron: Cron; sele
           <span className={s.value}>{cron.totalExecutedTransactions}</span>
         </div>
 
-        <div className={s.detailRow}>
-          <span className={s.label}>Queued:</span>
-          <span className={s.value}>
-            {formatDistanceToNow(queueDate, { addSuffix: true })}
-          </span>
-        </div>
+
 
         {cron.totalFeesPaid && (
           <div className={s.detailRow}>
@@ -521,21 +516,23 @@ export const CronList = () => {
           </div>
         </div>
         <div className={s.actions}>
-          <label style={{ display: "flex", alignItems: "center", gap: 6, marginRight: 12 }}>
+          <label className={s.selectAll}>
             <input
               type="checkbox"
+              className={s.selectCheckbox}
               checked={selectedIds.size > 0 && selectedIds.size === allSelectableIds.length}
               onChange={(e) => toggleSelectAll(e.target.checked)}
             />
-            <span style={{ fontSize: 12 }}>Select all</span>
+            <span className={s.selectAllText}>Select all</span>
           </label>
           <Button
             variant="outline"
             onClick={bulkCancel}
             disabled={selectedIds.size === 0 || isCancelling}
             className={s.refreshButton}
+            title={selectedIds.size ? `Cancel ${selectedIds.size} selected cron(s)` : undefined}
           >
-            {isCancelling ? "Cancelling..." : `Cancel (${selectedIds.size})`}
+            {isCancelling ? "Cancelling..." : `Cancel crons (${selectedIds.size})`}
           </Button>
           <Button
             variant="outline"
@@ -578,9 +575,9 @@ export const CronList = () => {
           {/* Bulk bar above grid if selection exists */}
           {selectedIds.size > 0 && (
             <div className={s.bulkBar}>
-              <div style={{ fontSize: 12, color: "#6b7280" }}>{selectedIds.size} selected</div>
-              <Button variant="outline" onClick={bulkCancel} disabled={isCancelling}>
-                {isCancelling ? "Cancelling..." : `Cancel (${selectedIds.size})`}
+              <div className={s.selectedCount}>{selectedIds.size} selected</div>
+              <Button variant="outline" onClick={() => setSelectedIds(new Set())}>
+                Cancel selection
               </Button>
             </div>
           )}

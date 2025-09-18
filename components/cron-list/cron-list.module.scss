@@ -315,6 +315,12 @@
   margin-bottom: 12px;
 }
 
+.selectedCount {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
 .cronCard {
   position: relative;
 }
@@ -349,6 +355,42 @@
   }
 }
 
+/* Larger, styled checkbox used in cards and bulk select */
+.selectCheckbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #002DCB; /* brand primary */
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.08s ease;
+
+  &:hover {
+    filter: brightness(0.97);
+  }
+  &:active {
+    transform: scale(0.96);
+  }
+  &:focus-visible {
+    outline: 2px solid rgba(0, 45, 203, 0.35);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* Select-all styling aligned with the UI */
+.selectAll {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
+}
+
+.selectAllText {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  user-select: none;
+}
+
 .status {
   padding: 4px 12px;
   border-radius: 20px;
@@ -363,6 +405,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
 }
 
 .detailRow {
@@ -371,15 +414,15 @@
   align-items: center;
 
   .label {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-muted);
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .value {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-primary);
-    font-weight: 400;
+    font-weight: 500;
     text-align: right;
     max-width: 200px;
     overflow: hidden;
