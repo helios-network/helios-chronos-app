@@ -12,6 +12,7 @@ export interface ButtonProps {
   size?: "small" | "medium" | "large"
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   type?: "button" | "submit" | "reset"
+  title?: string // allow native title attribute
 }
 
 export const Button = ({
