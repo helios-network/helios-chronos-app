@@ -72,6 +72,16 @@ const CronCard = ({ cron, selected, onToggleSelect, onEdit }: { cron: Cron; sele
             onChange={(e) => onToggleSelect(cron.id, e.target.checked)}
             className={s.selectCheckbox}
             style={{ marginRight: 8 }}
+            disabled={
+              cron.archived ||
+              cron.executionStage === ExecutionStage.COMPLETED ||
+              cron.executionStage === ExecutionStage.EXPIRED
+            }
+            title={
+              cron.archived || cron.executionStage === ExecutionStage.COMPLETED || cron.executionStage === ExecutionStage.EXPIRED
+                ? "Cannot select archived or finished crons"
+                : undefined
+            }
           />
           <span className={s.label}>ID:</span>
           <span className={s.value}>#{cron.id}</span>
@@ -377,8 +387,6 @@ export const CronList = () => {
   };
   const bulkCancel = async () => {
     if (selectedIds.size === 0) return;
-    const confirmed = window.confirm(`Cancel ${selectedIds.size} selected cron(s)?`);
-    if (!confirmed) return;
     // Sequential to avoid nonce races; can be parallel if provider handles it
     for (const id of Array.from(selectedIds)) {
       try { await cancelCron(id); } catch (e) { console.error("Bulk cancel failed for id", id, e); }

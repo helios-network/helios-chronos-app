@@ -10,6 +10,7 @@ import { useCreateCron, CreateCronParams } from "@/hooks/useCreateCron";
 import { Alert } from "@/components/alert";
 import { Heading } from "@/components/heading";
 import s from "./cron-scheduler.module.scss";
+import { useRouter } from "next/navigation";
 
 // Template Icon Component
 const TemplateIcon = ({ templateId }: { templateId: string }) => {
@@ -123,9 +124,8 @@ const DifficultyDots = ({ difficulty }: { difficulty: string }) => {
       {[1, 2, 3].map((dot) => (
         <div
           key={dot}
-          className={`${s.difficultyDot} ${
-            dot <= activeDots ? s.active : s.inactive
-          }`}
+          className={`${s.difficultyDot} ${dot <= activeDots ? s.active : s.inactive
+            }`}
         />
       ))}
     </div>
@@ -206,6 +206,7 @@ type CronSchedulerProps = { onStepChange?: (step: Step) => void };
 
 export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
   const { createCron, feedback, resetFeedback, isLoading } = useCreateCron();
+  const router = useRouter();
 
   const [currentStep, setCurrentStep] = useState<Step>("template");
 
@@ -260,10 +261,10 @@ export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
         amountToDeposit,
       };
 
-      await createCron(cronParams);
+      const result = await createCron(cronParams);
 
-      // Reset form on success
-      if (feedback.status === "success") {
+      // Reset form on success and navigate to tasks on home page
+      if (result) {
         setCurrentStep("template");
         setSelectedTemplate(null);
         // Reset all form fields
@@ -273,6 +274,9 @@ export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
         setParams("");
         setTaskName("");
         setTaskDescription("");
+
+        // Navigate to the "Your Automated Tasks" section on home page
+        router.push("/#tasks");
       }
     } catch (error) {
       console.error("Error scheduling cron:", error);
@@ -329,9 +333,8 @@ export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
             {TASK_TEMPLATES.map((template) => (
               <div
                 key={template.id}
-                className={`${s.templateCard} ${
-                  template.id === "custom" ? s.customTemplate : ""
-                }`}
+                className={`${s.templateCard} ${template.id === "custom" ? s.customTemplate : ""
+                  }`}
               >
                 <div className={s.templateIcon}>
                   <TemplateIcon templateId={template.id} />
@@ -451,9 +454,8 @@ export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
     <div className={s.progressContainer}>
       <div className={s.progressIndicator}>
         <div
-          className={`${s.progressStep} ${
-            currentStep === "template" ? s.active : s.completed
-          }`}
+          className={`${s.progressStep} ${currentStep === "template" ? s.active : s.completed
+            }`}
           onClick={() => setCurrentStep("template")}
         >
           <div className={s.stepIcon}>
@@ -466,19 +468,17 @@ export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
         </div>
 
         <div
-          className={`${s.stepConnector} ${
-            currentStep !== "template" ? s.active : ""
-          }`}
+          className={`${s.stepConnector} ${currentStep !== "template" ? s.active : ""
+            }`}
         />
 
         <div
-          className={`${s.progressStep} ${
-            currentStep === "configure"
-              ? s.active
-              : currentStep === "review" || currentStep === "deploy"
+          className={`${s.progressStep} ${currentStep === "configure"
+            ? s.active
+            : currentStep === "review" || currentStep === "deploy"
               ? s.completed
               : s.pending
-          }`}
+            }`}
           onClick={() =>
             currentStep !== "template" && setCurrentStep("configure")
           }
@@ -503,17 +503,15 @@ export const CronScheduler = ({ onStepChange }: CronSchedulerProps) => {
         </div>
 
         <div
-          className={`${s.stepConnector} ${
-            currentStep === "review" || currentStep === "deploy" ? s.active : ""
-          }`}
+          className={`${s.stepConnector} ${currentStep === "review" || currentStep === "deploy" ? s.active : ""
+            }`}
         />
 
         <div
-          className={`${s.progressStep} ${
-            currentStep === "review" || currentStep === "deploy"
-              ? s.active
-              : s.pending
-          }`}
+          className={`${s.progressStep} ${currentStep === "review" || currentStep === "deploy"
+            ? s.active
+            : s.pending
+            }`}
         >
           <div className={s.stepIcon}>
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">

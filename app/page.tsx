@@ -187,8 +187,8 @@ const NetworkStatisticsSection = () => {
                 isLoading
                   ? "..."
                   : error
-                  ? "Error"
-                  : stats?.cronCount?.toLocaleString() || "1226"
+                    ? "Error"
+                    : stats?.cronCount?.toLocaleString() || "1226"
               }
               description="Active automated tasks"
               iconSrc="/img/card1.svg"
@@ -199,8 +199,8 @@ const NetworkStatisticsSection = () => {
                 isLoading
                   ? "..."
                   : error
-                  ? "Error"
-                  : stats?.queueCount?.toLocaleString() || "17"
+                    ? "Error"
+                    : stats?.queueCount?.toLocaleString() || "17"
               }
               description="Task waiting execution"
               iconSrc="/img/card2.svg"
@@ -211,8 +211,8 @@ const NetworkStatisticsSection = () => {
                 isLoading
                   ? "..."
                   : error
-                  ? "Error"
-                  : stats?.archivedCrons?.toLocaleString() || "4845"
+                    ? "Error"
+                    : stats?.archivedCrons?.toLocaleString() || "4845"
               }
               description="Task completed"
               iconSrc="/img/card3.png"
@@ -223,8 +223,8 @@ const NetworkStatisticsSection = () => {
                 isLoading
                   ? "..."
                   : error
-                  ? "Error"
-                  : stats?.executedLastBlockCount?.toLocaleString() || "17"
+                    ? "Error"
+                    : stats?.executedLastBlockCount?.toLocaleString() || "17"
               }
               description="Task executed recently"
               iconSrc="/img/card4.svg"
@@ -264,9 +264,12 @@ export default function HomePage() {
     console.log("HomePage mounted - invalidating queries");
 
     // Show a subtle toast to indicate data refresh
+    // Clear any stale toast state before reusing the same id
+    toast.dismiss("home-refresh");
     toast.loading("Refreshing data...", {
       id: "home-refresh",
       duration: 2000,
+      description: undefined,
     });
 
     // Invalidate cron statistics
@@ -306,7 +309,10 @@ export default function HomePage() {
       {/* Not connected: show connect wallet section with gradient continuing into Helper */}
       {!address && (
         <div className={s.gradientWrap}>
-          <AutomatedTasksSection />
+          {/* Anchor target for "Your Automated Tasks" when wallet not connected */}
+          <div id="tasks">
+            <AutomatedTasksSection />
+          </div>
           <Helper />
         </div>
       )}
@@ -316,9 +322,12 @@ export default function HomePage() {
         <div className={s.gradientWrap}>
           <div className={s.contentWrapper}>
             <div className={s.content}>
-              <Card className={s.sectionCard}>
-                <CronList />
-              </Card>
+              {/* Anchor target for "Your Automated Tasks" when wallet is connected */}
+              <div id="tasks">
+                <Card className={s.sectionCard}>
+                  <CronList />
+                </Card>
+              </div>
               <Card className={s.sectionCard}>
                 <CronReceipts />
               </Card>

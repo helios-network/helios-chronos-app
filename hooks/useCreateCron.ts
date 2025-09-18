@@ -298,8 +298,11 @@ export const useCreateCron = () => {
 
       try {
         console.log("Cron creation in progress...");
+        // Ensure previous toast state is cleared to avoid stale descriptions
+        toast.dismiss("cron-creation");
         toast.loading("Preparing cron transaction...", {
           id: "cron-creation",
+          description: undefined,
         });
 
         // Create web3 contract instance
@@ -374,6 +377,7 @@ export const useCreateCron = () => {
 
         toast.loading("Sending transaction to blockchain...", {
           id: "cron-creation",
+          description: undefined,
         });
 
         // Send the transaction
@@ -446,6 +450,9 @@ export const useCreateCron = () => {
     try {
       const result = await createCronMutation.mutateAsync(cronParams);
 
+      // Mark feedback as success for consumers
+      setFeedback({ status: "success", message: "Cron scheduled successfully!" });
+
       toast.success("Cron scheduled successfully!", {
         id: "cron-creation",
         description: "Your automated task has been created and is now active",
@@ -467,7 +474,11 @@ export const useCreateCron = () => {
 
       return result;
     } catch (error) {
-      // Error is already handled in the mutation
+      // Surface failure through feedback as well
+      setFeedback({
+        status: "danger",
+        message: getErrorMessage(error) || "Error during cron creation",
+      });
       console.error("Cron creation failed:", error);
       throw error;
     }
@@ -480,7 +491,10 @@ export const useCreateCron = () => {
       if (!address) throw new Error("No wallet address available");
 
       try {
-        toast.loading("Cancelling cron...", { id: `cron-cancel-${cronId}` });
+        // Reset previous toast state for this cron id
+        toast.loading("Cancelling cron...", { id: `cron-cancel-${cronId}`, description: undefined });
+        // Give the UI a chance to render the toast before wallet prompt
+        await new Promise((resolve) => setTimeout(resolve, 50));
 
         const contract = new web3Provider.eth.Contract(
           chronosAbi,
@@ -546,7 +560,9 @@ export const useCreateCron = () => {
       if (!address) throw new Error("No wallet address available");
 
       try {
-        toast.loading("Updating cron...", { id: `cron-update-${p.cronId}` });
+        // Reset previous toast state for this cron id
+        toast.dismiss(`cron-update-${p.cronId}`);
+        toast.loading("Updating cron...", { id: `cron-update-${p.cronId}`, description: undefined });
 
         const contract = new web3Provider.eth.Contract(
           chronosAbi,

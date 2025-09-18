@@ -42,11 +42,13 @@ const ReceiptCard = ({ receipt }: ReceiptCardProps) => {
       await navigator.clipboard.writeText(text);
       toast.success("Copied to clipboard!", {
         duration: 2000,
+        id: "clipboard",
       });
     } catch (err) {
       console.error("Failed to copy: ", err);
       toast.error("Failed to copy to clipboard", {
         duration: 2000,
+        id: "clipboard",
       });
     }
   };
@@ -60,9 +62,8 @@ const ReceiptCard = ({ receipt }: ReceiptCardProps) => {
         <div className={s.receiptContent}>
           <div className={s.receiptStatus}>
             <div
-              className={`${s.statusIndicator} ${
-                isSuccess ? s.statusSuccess : s.statusFailed
-              }`}
+              className={`${s.statusIndicator} ${isSuccess ? s.statusSuccess : s.statusFailed
+                }`}
             >
               {isSuccess ? "✓" : "✗"}
             </div>

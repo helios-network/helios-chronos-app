@@ -313,11 +313,18 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
+
+  button {
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 1rem;
+  }
 }
 
 .selectedCount {
-  font-size: 14px;
-  color: var(--text-secondary);
+  font-size: 1rem; /* match medium button text size */
+  font-family: var(--font-main); /* match button font family */
+  color: var(--primary-medium); /* match outline button text color */
   font-weight: 700;
 }
 
@@ -385,8 +392,9 @@
 }
 
 .selectAllText {
-  font-size: 14px;
-  color: var(--text-secondary);
+  font-size: 1rem; /* match button size */
+  font-family: var(--font-main);
+  color: var(--primary-medium);
   font-weight: 600;
   user-select: none;
 }
