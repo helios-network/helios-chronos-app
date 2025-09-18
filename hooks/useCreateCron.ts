@@ -473,10 +473,178 @@ export const useCreateCron = () => {
     }
   };
 
+  // Cancel cron mutation
+  const cancelCronMutation = useMutation({
+    mutationFn: async (cronId: number | string | bigint) => {
+      if (!web3Provider) throw new Error("No wallet connected");
+      if (!address) throw new Error("No wallet address available");
+
+      try {
+        toast.loading("Cancelling cron...", { id: `cron-cancel-${cronId}` });
+
+        const contract = new web3Provider.eth.Contract(
+          chronosAbi,
+          CHRONOS_CONTRACT_ADDRESS
+        );
+
+        const tx = await contract.methods.cancelCron(cronId).send({
+          from: address,
+          gasPrice: web3Provider.utils.toWei("20", "gwei"),
+          gas: "500000",
+        });
+
+        toast.loading(`Transaction sent! Waiting for confirmation...`, {
+          id: `cron-cancel-${cronId}`,
+          description: `Hash: ${tx.transactionHash.slice(0, 10)}...`,
+        });
+
+        return { transactionHash: tx.transactionHash };
+      } catch (error) {
+        toast.error("Failed to cancel cron", {
+          id: `cron-cancel-${cronId}`,
+          description: getErrorMessage(error) || "Error during cron cancellation",
+        });
+        throw error;
+      }
+    },
+  });
+
+  const cancelCron = async (cronId: number) => {
+    try {
+      const idLike = BigInt(cronId);
+      const result = await cancelCronMutation.mutateAsync(idLike);
+
+      toast.success("Cron cancelled successfully!", {
+        id: `cron-cancel-${cronId}`,
+      });
+
+      // Refresh lists and statistics
+      await queryClient.refetchQueries({ queryKey: ["crons", address] });
+      await queryClient.refetchQueries({ queryKey: ["cronStatistics"] });
+
+      return result;
+    } catch (error) {
+      // Error already handled
+      console.error("Cron cancellation failed:", error);
+      throw error;
+    }
+  };
+
+  // Update cron mutation
+  interface UpdateCronParams {
+    cronId: number;
+    newFrequency: number; // blocks
+    newParams: string[]; // string-encoded params
+    newExpirationBlock: number; // absolute block
+    newGasLimit: number;
+    newMaxGasPrice: string; // in gwei
+  }
+
+  const updateCronMutation = useMutation({
+    mutationFn: async (p: UpdateCronParams) => {
+      if (!web3Provider) throw new Error("No wallet connected");
+      if (!address) throw new Error("No wallet address available");
+
+      try {
+        toast.loading("Updating cron...", { id: `cron-update-${p.cronId}` });
+
+        const contract = new web3Provider.eth.Contract(
+          chronosAbi,
+          CHRONOS_CONTRACT_ADDRESS
+        );
+
+        // Convert inputs to decimal strings to avoid JS BigInt/number mixing
+        const cronId = BigInt(p.cronId).toString();
+        const newFrequency = BigInt(p.newFrequency).toString();
+        const newExpirationBlock = BigInt(p.newExpirationBlock).toString();
+        const newGasLimit = BigInt(p.newGasLimit).toString();
+        // updateCron expects max gas price in gwei (uint64), not wei; sanitize decimals
+        const parsedMaxGwei = Math.max(0, Math.floor(Number(p.newMaxGasPrice)));
+        if (!Number.isFinite(parsedMaxGwei)) {
+          throw new Error("Invalid max gas price (gwei)");
+        }
+        const newMaxGasPrice = BigInt(parsedMaxGwei).toString();
+
+        // Prepare args (all as strings where applicable)
+        const args = [
+          cronId,
+          newFrequency,
+          p.newParams,
+          newExpirationBlock,
+          newGasLimit,
+          newMaxGasPrice,
+        ] as const;
+
+        // Dry-run to surface reverts before sending
+        try {
+          await contract.methods.updateCron(...args).call({ from: address });
+        } catch (callErr) {
+          throw callErr;
+        }
+
+        // Estimate gas with buffer
+        let gas = "2000000"; // fallback
+        try {
+          const est = await contract.methods
+            .updateCron(...args)
+            .estimateGas({ from: address });
+          gas = Math.ceil(Number(est) * 1.25).toString(); // 25% buffer
+        } catch (e) {
+          // if estimation fails, proceed with fallback
+          console.warn("Gas estimation failed, using fallback 2,000,000", e);
+        }
+
+        const tx = await contract.methods
+          .updateCron(...args)
+          .send({
+            from: address,
+            gasPrice: web3Provider.utils.toWei("20", "gwei"),
+            gas,
+          });
+
+        toast.loading(`Transaction sent! Waiting for confirmation...`, {
+          id: `cron-update-${p.cronId}`,
+          description: `Hash: ${tx.transactionHash.slice(0, 10)}...`,
+        });
+
+        return { transactionHash: tx.transactionHash };
+      } catch (error) {
+        toast.error("Failed to update cron", {
+          id: `cron-update-${p.cronId}`,
+          description: getErrorMessage(error) || "Error during cron update",
+        });
+        throw error;
+      }
+    },
+  });
+
+  const updateCron = async (params: UpdateCronParams) => {
+    console.log("updateCron", params)
+    try {
+      const result = await updateCronMutation.mutateAsync(params);
+
+      toast.success("Cron updated successfully!", {
+        id: `cron-update-${params.cronId}`,
+      });
+
+      await queryClient.refetchQueries({ queryKey: ["crons", address] });
+      await queryClient.refetchQueries({ queryKey: ["cronStatistics"] });
+
+      return result;
+    } catch (error) {
+      console.error("Cron update failed:", error);
+      throw error;
+    }
+  };
+
   return {
     createCron,
+    cancelCron,
+    updateCron,
     feedback,
     resetFeedback,
     isLoading: createCronMutation.isPending,
+    isCancelling: cancelCronMutation.isPending,
+    isUpdating: updateCronMutation.isPending,
   };
 };
