@@ -89,10 +89,16 @@ const CronCard = ({ cron, selected, onToggleSelect, onEdit }: { cron: Cron; sele
         <div className={s.headerBadges}>
           {cron.archived && <span className={s.archivedBadge}>Archived</span>}
           <div
-            className={s.status}
-            style={{
-              backgroundColor: getExecutionStageColor(derivedStage),
-            }}
+            className={[
+              s.status,
+              derivedStage === ExecutionStage.PENDING && s.statusPending,
+              derivedStage === ExecutionStage.EXECUTING && s.statusExecuting,
+              derivedStage === ExecutionStage.COMPLETED && s.statusCompleted,
+              derivedStage === ExecutionStage.FAILED && s.statusFailed,
+              derivedStage === ExecutionStage.EXPIRED && s.statusExpired,
+            ]
+              .filter(Boolean)
+              .join(" ")}
           >
             {getExecutionStageLabel(derivedStage)}
           </div>

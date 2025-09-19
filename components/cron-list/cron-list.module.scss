@@ -330,6 +330,40 @@
 
 .cronCard {
   position: relative;
+  font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
+  background: rgba(255, 255, 255, 0.514) !important; /* glass-like to match other cards */
+  border: 1px solid rgba(0, 45, 203, 0.1);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 16px rgba(0, 45, 203, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  overflow: hidden;
+
+  /* Subtle top glow to match card effects */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--primary-medium) 6%, transparent) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: var(--border-medium);
+
+    &::before {
+      opacity: 1;
+    }
+  }
 }
 
 .cronHeader {
@@ -338,7 +372,24 @@
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 16px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* Header badges area */
+.headerBadges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.archivedBadge {
+  background: color-mix(in srgb, var(--text-secondary) 85%, white);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .actions {
@@ -403,10 +454,27 @@
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 12px;
-  font-weight: 500;
-  color: white;
+  font-weight: 700; /* bolder for visibility */
+  color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+/* Status color variants aligned to design tokens */
+.statusPending {
+  background: var(--warning);
+}
+.statusExecuting {
+  background: var(--primary-medium);
+}
+.statusCompleted {
+  background: var(--success);
+}
+.statusFailed {
+  background: var(--danger);
+}
+.statusExpired {
+  background: var(--text-muted);
 }
 
 .cronDetails {
@@ -424,18 +492,20 @@
   .label {
     font-size: 13px;
     color: var(--text-muted);
-    font-weight: 600;
+    font-weight: 700; /* stronger label weight per design */
+    font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
   }
 
   .value {
     font-size: 13px;
     color: var(--text-primary);
-    font-weight: 500;
+    font-weight: 600; /* match other stats */
     text-align: right;
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-family: "Satoshi Variable", -apple-system, Roboto, Helvetica, sans-serif;
   }
 }
 
