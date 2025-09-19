@@ -29,23 +29,6 @@ const getExecutionStageLabel = (stage: ExecutionStage): string => {
   }
 };
 
-const getExecutionStageColor = (stage: ExecutionStage): string => {
-  switch (stage) {
-    case ExecutionStage.PENDING:
-      return "#f59e0b";
-    case ExecutionStage.EXECUTING:
-      return "#002DCB";
-    case ExecutionStage.COMPLETED:
-      return "#10b981";
-    case ExecutionStage.FAILED:
-      return "#ef4444";
-    case ExecutionStage.EXPIRED:
-      return "#828DB3";
-    default:
-      return "#828DB3";
-  }
-};
-
 const CronCard = ({ cron, selected, onToggleSelect, onEdit }: { cron: Cron; selected: boolean; onToggleSelect: (id: number, checked: boolean) => void; onEdit: (cron: Cron) => void }) => {
   const { cancelCron, isCancelling } = useCreateCron();
 
@@ -186,7 +169,7 @@ const CronCard = ({ cron, selected, onToggleSelect, onEdit }: { cron: Cron; sele
           <Button
             variant="secondary"
             size="small"
-            onClick={() => { }}
+            onClick={() => onEdit(cron)}
             disabled={true}
             title="Editing is temporarily disabled"
           >
@@ -222,7 +205,7 @@ const EditCronModal = ({ cron, onClose }: { cron: Cron; onClose: () => void }) =
         if (!web3) return;
         const bn = await web3.eth.getBlockNumber();
         if (mounted) setCurrentBlock(Number(bn));
-      } catch (_) {
+      } catch {
         // ignore
       }
     })();
@@ -231,7 +214,7 @@ const EditCronModal = ({ cron, onClose }: { cron: Cron; onClose: () => void }) =
     };
   }, [web3]);
 
-  const disabled = cron.archived || cron.executionStage === ExecutionStage.COMPLETED || cron.executionStage === ExecutionStage.EXPIRED;
+  // const disabled = cron.archived || cron.executionStage === ExecutionStage.COMPLETED || cron.executionStage === ExecutionStage.EXPIRED;
 
   const validate = (): boolean => {
     const errs: string[] = [];
@@ -373,7 +356,7 @@ export const CronList = () => {
   const { data, isLoading, error, refetch, isFetching } = useCrons();
 
   // Hooks must be declared before any conditional returns
-  const crons = data?.crons || [];
+  const crons = useMemo(() => data?.crons || [], [data]);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
   const { cancelCron, isCancelling } = useCreateCron();
   const allSelectableIds = useMemo(
