@@ -35,6 +35,7 @@ cd helios-chronos-app
 
 ```bash
 npm install
+npm -v
 ```
 
 3. Set up environment variables:
